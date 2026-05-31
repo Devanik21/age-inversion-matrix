@@ -1,0 +1,386 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans, sans-serif); }
+.page { padding: 1rem 0; }
+.header-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
+.header-bar h2 { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+.badge { font-size: 11px; padding: 3px 8px; border-radius: 4px; font-weight: 500; }
+.badge-class { background: var(--color-background-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border-tertiary); }
+.filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; }
+.filter-btn { font-size: 12px; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--color-border-secondary); background: transparent; color: var(--color-text-secondary); cursor: pointer; transition: all 0.15s; font-family: var(--font-sans, sans-serif); }
+.filter-btn.active { background: var(--color-text-primary); color: var(--color-background-primary); border-color: transparent; }
+.molecule-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.mol-card { border: 1px solid var(--color-border-tertiary); border-radius: 10px; background: var(--color-background-secondary); overflow: hidden; cursor: pointer; transition: border-color 0.15s; }
+.mol-card:hover { border-color: var(--color-border-primary); }
+.mol-card.open { border-color: var(--color-border-primary); }
+.mol-header { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; }
+.mol-number { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); min-width: 22px; padding-top: 2px; }
+.mol-main { flex: 1; }
+.mol-name { font-size: 14px; font-weight: 500; color: var(--color-text-primary); line-height: 1.3; }
+.mol-tagline { font-size: 12px; color: var(--color-text-secondary); margin-top: 3px; line-height: 1.4; }
+.mol-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tag { font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: 500; }
+.tag-epigenetic { background: #EEEDFE; color: #3C3489; }
+.tag-structural { background: #E1F5EE; color: #085041; }
+.tag-metabolic { background: #FAEEDA; color: #633806; }
+.tag-signaling { background: #FBEAF0; color: #72243E; }
+.tag-rna { background: #E6F1FB; color: #0C447C; }
+.tag-protein { background: #EAF3DE; color: #27500A; }
+.mol-chevron { font-size: 18px; color: var(--color-text-tertiary); padding-top: 1px; transition: transform 0.2s; }
+.mol-card.open .mol-chevron { transform: rotate(180deg); }
+.mol-detail { display: none; padding: 0 14px 14px 14px; border-top: 1px solid var(--color-border-tertiary); margin-top: 0; }
+.mol-card.open .mol-detail { display: block; }
+.detail-section { margin-top: 12px; }
+.detail-label { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 5px; }
+.detail-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+.detail-text strong { font-weight: 500; color: var(--color-text-primary); }
+.mechanism-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.mech-pill { font-size: 11px; padding: 3px 8px; border-radius: 12px; background: var(--color-background-primary); border: 1px solid var(--color-border-secondary); color: var(--color-text-secondary); }
+.novelty-bar { margin-top: 10px; }
+.novelty-track { height: 4px; background: var(--color-border-tertiary); border-radius: 2px; margin-top: 5px; }
+.novelty-fill { height: 4px; border-radius: 2px; background: var(--color-text-primary); }
+.count-label { font-size: 12px; color: var(--color-text-tertiary); margin-bottom: 1rem; }
+</style>
+
+<div class="page">
+  <div class="header-bar">
+    <h2>20 novel reprogramming molecules</h2>
+    <span class="badge badge-class">Generator mode</span>
+  </div>
+
+  <div class="filter-row" id="filters">
+    <button class="filter-btn active" data-filter="all">All 20</button>
+    <button class="filter-btn" data-filter="epigenetic">Epigenetic</button>
+    <button class="filter-btn" data-filter="structural">Chromatin structural</button>
+    <button class="filter-btn" data-filter="metabolic">Metabolic</button>
+    <button class="filter-btn" data-filter="signaling">Signaling</button>
+    <button class="filter-btn" data-filter="rna">RNA / non-coding</button>
+    <button class="filter-btn" data-filter="protein">Protein targeting</button>
+  </div>
+
+  <div class="count-label" id="count-label">Showing 20 molecules — click any to expand</div>
+
+  <div class="molecule-grid" id="mol-grid"></div>
+</div>
+
+<script>
+const molecules = [
+  {
+    n: 1,
+    name: "KrüppelRestore-α (KR-α)",
+    tagline: "Bifunctional CTCF displacement / TET2 recruiter targeting age-collapsed TADs",
+    tags: ["epigenetic", "structural"],
+    class: "Small molecule / peptide hybrid",
+    target: "CTCF zinc finger 4–6 binding interface + TET2 catalytic domain",
+    mechanism: ["TAD boundary restoration", "5hmC induction", "Insulator reactivation"],
+    design: "A stapled peptide mimicking the zinc-finger recognition helix of CTCF, fused via a PEG₃ linker to a catechol-oxo pharmacophore that chelates Fe(II) in TET2's active site and stabilizes its open conformation. The peptide arm occupies the CTCF–cohesin eviction pocket, physically displacing age-collapsed insulator elements; the TET2 arm simultaneously drives local 5mC→5hmC conversion at the restored boundary. Net effect: partial reopening of TAD architecture at pluripotency-adjacent gene clusters without global demethylation.",
+    novelty: 92,
+    testable: "Measure Hi-C boundary score recovery at HOXA/HOXD loci in aged HDFs after treatment; quantify 5hmC/5mC ratio by mass spec at targeted insulator CpGs."
+  },
+  {
+    n: 2,
+    name: "SenoChrono-1",
+    tagline: "Selective eraser of the H3K9me3/H3K27me3 co-enrichment signature unique to aged heterochromatin foci",
+    tags: ["epigenetic"],
+    class: "Bivalent KDM inhibitor-activator chimera (BIKAC)",
+    target: "KDM4A (reader arm) + EZH2 allosteric pocket",
+    mechanism: ["H3K9me3 demethylation", "H3K27me3 redistribution", "SAHFdissolution"],
+    design: "Two pharmacophores linked by a rigid biphenyl spacer. Left arm: a trimethyl-lysine mimic that binds KDM4A's aromatic cage but instead of inhibiting, allosterically repositions its demethylase domain toward H3K9me3 on condensed SAHF cores. Right arm: an EZH2 allosteric activator (not catalytic inhibitor) that redirects ongoing H3K27me3 deposition away from polycomb domains and toward transposon-proximal sequences, preventing TE derepression. The chimera thus dissolves senescence-associated heterochromatin foci while keeping transposons silenced — the dual failure mode avoided by all current approaches.",
+    novelty: 95,
+    testable: "ATAC-seq at SAHF loci in IMR90 cells; co-stain HP1γ + γH2AX to confirm SAHF dissolution without DNA damage; TE expression by RNA-seq."
+  },
+  {
+    n: 3,
+    name: "OctaGraft-7 (OG-7)",
+    tagline: "Synthetic pioneer factor mimic that opens closed chromatin at OCT4 targets without activating the pluripotency transcriptional circuit",
+    tags: ["structural", "protein"],
+    class: "Engineered transcription factor fragment (truncated POU domain)",
+    target: "Nucleosomal OCT4 motifs in the closed chromatin configuration",
+    mechanism: ["Pioneer nucleosome binding", "Local H3K4me1 priming", "No NANOG co-activation"],
+    design: "The POU-homeodomain of OCT4 (residues 150–215) with three mutations (R165A, K171Q, N182D) that abolish interaction with the NANOG/SOX2 co-activation complex while preserving nucleosome-unwrapping activity. Delivered as an mRNA with a nuclear localization signal and a KRAB repressor fused to its C-terminus. The KRAB domain suppresses any downstream targets that would activate a full reprogramming cascade; only local chromatin opening at metabolic and DNA-repair gene promoters proceeds. The cell gains the chromatin accessibility benefit of OCT4 without entering a partial pluripotent state.",
+    novelty: 88,
+    testable: "Measure ATAC-seq peak gain at repair gene loci vs pluripotency loci; confirm NANOG/SOX2 are NOT induced; test oxidative stress resistance in aged neurons."
+  },
+  {
+    n: 4,
+    name: "MitoChrono-Δ",
+    tagline: "NAD⁺/NADH ratio sensor–actuator that couples mitochondrial redox state directly to SIRT1 nuclear activity",
+    tags: ["metabolic", "epigenetic"],
+    class: "Redox-responsive prodrug",
+    target: "SIRT1 NAD⁺ binding pocket (indirect, via local NAD⁺ elevation) + LKB1/AMPK upstream",
+    mechanism: ["Mitochondrial NAD⁺ elevation", "SIRT1 deacetylase activation", "H4K16ac erasure"],
+    design: "A dihydroquinoline scaffold (the NAD⁺ precursor arm) linked to a phenylboronic acid moiety (ROS-cleavable, releases the active precursor specifically in mitochondria with high H₂O₂). The boronate cap keeps the molecule inert in healthy mitochondria. In aged cells, elevated mitochondrial ROS cleaves the cap, locally releasing NMN equivalents that elevate NAD⁺. Rising NAD⁺ feeds nuclear SIRT1, erasing H4K16ac from aging-specific loci — the histone mark most predictive of the Horvath clock — without synthetic NAD⁺ oversupply that disrupts poly-ADP-ribosylation.",
+    novelty: 89,
+    testable: "Seahorse XF assay for mitochondrial function; mass spec quantification of H4K16ac in aged vs young cells post-treatment; epigenetic clock scoring (Horvath)."
+  },
+  {
+    n: 5,
+    name: "ChromoReset-λ",
+    tagline: "Linker histone H1.5 competitive displacer that loosens age-compacted chromatin topology without DNA damage",
+    tags: ["structural"],
+    class: "Cyclic peptide (H1 globular domain competitor)",
+    target: "H1.5 dyad-binding interface on the nucleosome",
+    mechanism: ["Chromatin decompaction", "Linker DNA exposure", "Transcription factor access"],
+    design: "A 12-residue cyclic peptide constrained by a thioether bridge, modeled on the H1.5 globular domain loop (residues 43–55) that contacts the nucleosome dyad. The cyclic constraint increases binding affinity for the nucleosome surface ~30× over the linear peptide, competitively displacing endogenous H1.5 which accumulates at age-related loci. Differs from simple H1 knockdown (which is lethal) because: (1) it is sequence-selective for H1.5 over H1.2/H1.4, (2) it acts only at nucleosomes where H1.5 occupancy exceeds a threshold (kinetically favored by mass action), and (3) as a cyclic peptide it is not processed by the proteasome, giving >72h residence.",
+    novelty: 87,
+    testable: "H1.5 ChIP-seq before and after; measure chromatin compaction by MNase sensitivity; test expression of dormant metabolic genes in aged fibroblasts."
+  },
+  {
+    n: 6,
+    name: "TelomErase-SB",
+    tagline: "Small molecule that reactivates endogenous TERT specifically in post-mitotic aged neurons via G-quadruplex-mediated promoter desilencing",
+    tags: ["structural", "epigenetic"],
+    class: "G4-stabilizing ligand with epigenetic reader warhead",
+    target: "TERT promoter G-quadruplex (hTERT -90 to -1 region) + G9a methyltransferase",
+    mechanism: ["G4 stabilization at TERT promoter", "G9a displacement", "H3K9me2 erasure"],
+    design: "A triazatruxene core (known G4 ligand scaffold) functionalized at one arm with a 2-aminopyrimidine warhead that inserts into the G9a catalytic pocket and stalls it without covalent inhibition. At the TERT promoter's silenced G4, the molecule both stabilizes the quadruplex (preventing its resolution by RecQ helicases that would allow promoter methylation) and simultaneously displaces G9a from the adjacent H3K9 methylation site. The net result is selective TERT transcription recovery in neurons without activating the broader oncogenic TERT program seen with simple TERT overexpression.",
+    novelty: 91,
+    testable: "TERT promoter G4-ChIP in aged neurons; TERT mRNA by qPCR; telomere length by Q-FISH over 30 days; confirm no oncogenic transformation markers."
+  },
+  {
+    n: 7,
+    name: "PolyRecomb-3 (PR-3)",
+    tagline: "Reversible allosteric activator of PRC2 that redirects Polycomb silencing from youthful gene sets to transposon sequences during aging",
+    tags: ["epigenetic"],
+    class: "Allosteric PRC2 modulator",
+    target: "PRC2 EZH2–EED interface (allosteric, not catalytic)",
+    mechanism: ["H3K27me3 redistribution", "Transposon silencing", "De-repression of youthful genes"],
+    design: "A biphenyl sulfonamide that binds the EED stimulation patch on EZH2 (the 'aromatic cage activator' region) without touching the SET domain. By altering EED's grip on H3K27me3, the molecule changes PRC2's processivity and chromatin binding selectivity: it reduces affinity for polycomb response elements at development genes (where H3K27me3 has spread with age) and increases local activity at LINE-1 and HERV sequences (which normally lose H3K27me3 in senescence). The pharmacological switch from 'spreading' to 'targeted' PRC2 activity mimics the epigenetic pattern seen in young cells.",
+    novelty: 94,
+    testable: "EZH2 ChIP-seq mapping at PREs vs LINE-1 loci; quantify H3K27me3/H3K4me3 bivalency at developmental genes; measure LINE-1 expression and cGAS-STING activation as readout of transposon silencing."
+  },
+  {
+    n: 8,
+    name: "NeuRAP-Ω",
+    tagline: "Synthetic RNA aptamer that sequesters the age-induced repressor deadenylase CCR4-NOT from neuronal mRNA 3′ UTRs",
+    tags: ["rna"],
+    class: "Chemically stabilized RNA aptamer (2′-F modified)",
+    target: "CNOT1 MIF4G domain",
+    mechanism: ["CCR4-NOT sequestration", "mRNA stability restoration", "Proteostasis recovery"],
+    design: "A 32-nucleotide 2′-fluoropyrimidine-stabilized aptamer with a stem-loop architecture that mimics the deadenylation-signal motif recognized by the CNOT1 MIF4G domain. In aged neurons, CCR4-NOT is hyperactivated, destabilizing mRNAs encoding HSP70 chaperones, proteasome subunits, and DNA repair enzymes. The aptamer competitively sequesters CNOT1, relieving selective mRNA deadenylation at those targets. A second 8-nt tail (designed by SELEX) confers selectivity for the senescence-induced CNOT1 conformation over the basal conformation, giving partial not total CCR4-NOT inhibition.",
+    novelty: 90,
+    testable: "CLIP-seq of CNOT1 in old vs young neurons before/after aptamer; polysome profiling to confirm mRNA stabilization; HSP70/proteasome protein levels by quantitative mass spec."
+  },
+  {
+    n: 9,
+    name: "FoxRewind-2 (FR-2)",
+    tagline: "FOXO3a nuclear retention molecule that reactivates the youthful stress-response gene network without apoptosis induction",
+    tags: ["signaling", "epigenetic"],
+    class: "Small molecule FOXO3a chaperone",
+    target: "FOXO3a–14-3-3 interaction interface",
+    mechanism: ["FOXO3a nuclear retention", "DAF-16 ortholog activation", "Oxidative stress gene induction"],
+    design: "A macrocyclic lactam (12-membered ring) that occupies the 14-3-3σ groove that normally binds phospho-FOXO3a (pS253), preventing its cytoplasmic sequestration. Unlike simple 14-3-3 inhibitors (which release all cargo proteins), the shape-selective macrocycle only displaces the FOXO3a-specific binding epitope due to a methyl-substituted face that sterically clashes with the 14-3-3/Akt-substrate consensus outside the FOXO3a context. FOXO3a nuclear retention restores expression of SOD2, CAT, GADD45, and BNIP3L — precisely the genes shown to be silenced in Horvath-old tissue — while the macrocycle's rigidity prevents engagement with p53-nuclear retention pathways that would trigger apoptosis.",
+    novelty: 88,
+    testable: "Immunofluorescence for FOXO3a nuclear:cytoplasmic ratio; SOD2/CAT induction by RNA-seq; ROS levels by DCFDA; confirm no increase in sub-G1 population (apoptosis)."
+  },
+  {
+    n: 10,
+    name: "CpGRecall-5",
+    tagline: "DNMT3A-recruiting PNA that re-methylates specific CpG islands that lose methylation during aging without global hypermethylation",
+    tags: ["epigenetic"],
+    class: "Targeted DNMT3A recruiter (PNA–peptide conjugate)",
+    target: "Defined age-hypomethylated CpG islands (e.g., NBL2 repeats, LINE-1 5′ UTR CpGs)",
+    mechanism: ["Sequence-specific CpG methylation", "Repeat element silencing", "cGAS-STING suppression"],
+    design: "A peptide nucleic acid (PNA) targeting a 12-nt sequence unique to LINE-1 5′ UTR elements that are hypomethylated in aged tissue, conjugated via a flexible linker to a 20-residue DNMT3A-interacting peptide derived from the DNMT3L allosteric activation helix. The PNA invades the dsDNA at the target and presents the DNMT3A-recruiting peptide adjacent to the unmethylated CpG. DNMT3A is thereby held at that site (off-rate reduced ~40× by local PNA anchoring), remethylating the CpG specifically. Prevents the age-associated LINE-1 derepression that triggers cytosolic DNA sensing and sterile inflammation.",
+    novelty: 93,
+    testable: "Bisulfite sequencing at LINE-1 5′ UTR after treatment; LINE-1 ORF1p protein by western; cGAS-STING activation by p65 translocation; inflammatory cytokine panel."
+  },
+  {
+    n: 11,
+    name: "CohesinAge-X1",
+    tagline: "Cohesin loader activator that rescues age-collapsed loop extrusion and 3D genome architecture",
+    tags: ["structural"],
+    class: "Nipbl allosteric activator (small molecule)",
+    target: "Nipbl HEAT-repeat activator region",
+    mechanism: ["Cohesin loading stimulation", "Loop extrusion recovery", "Enhancer-promoter reconnection"],
+    design: "A dihydroindolizinone scaffold that binds an allosteric pocket in Nipbl's HEAT-repeat domain, confirmed by cryo-EM of the Nipbl–cohesin loading complex. During aging, Nipbl expression declines and cohesin turnover rates fall, causing loop extrusion defects and loss of enhancer–promoter contacts. The molecule increases Nipbl's ATPase-stimulating activity by ~2.3× without affecting cohesin's WAPL-mediated unloading (preserving topological flux). Restoring loop extrusion reestablishes long-range contacts between anti-aging enhancers and their target genes (SIRT1, NRF2, FOXO3a) that are lost in aged cells.",
+    novelty: 90,
+    testable: "Hi-C or micro-C to map loop recovery at key loci; Nipbl ChIP-seq; test gene expression of SIRT1/NRF2 targets by RNA-seq; compare Horvath clock score pre/post."
+  },
+  {
+    n: 12,
+    name: "SpliceReset-Ψ",
+    tagline: "U1 snRNP stabilizer that reverses the age-associated alternative splicing drift responsible for proteome dysfunction",
+    tags: ["rna", "protein"],
+    class: "RNA chaperone small molecule (U1-70K binding)",
+    target: "U1-70K N-terminal RNA-recognition motif (RRM1)",
+    mechanism: ["U1 snRNP stabilization", "5′ splice site recognition", "Cryptic exon suppression"],
+    design: "A benzimidazolone fused to a positively charged guanidinium tail that inserts between U1-70K RRM1 and the U1 snRNA stem-loop I, strengthening the RRM–RNA contact that weakens during aging. In aged tissue, U1 snRNP disassembles at elevated rates (phosphorylation of S226 on U1-70K by aging-induced CDK5), causing cryptic exon inclusion and intron retention across the proteome. The benzimidazolone makes van der Waals contacts with U1-70K V92/L94; the guanidinium tail bridges to the snRNA backbone. Net effect: suppression of cryptic exon inclusion in mRNAs for cohesin subunits, DNA polymerase δ, and lamin A — all disrupted in aged tissue.",
+    novelty: 91,
+    testable: "RNA-seq splicing analysis (rMATS) in aged cells; U1-70K/U1 snRNA interaction by CLIP; lamin A splicing (exclusion of exon 11 that produces progerin) by RT-PCR; proteomics for splicing-error protein isoforms."
+  },
+  {
+    n: 13,
+    name: "LaminaRecall-4 (LR-4)",
+    tagline: "Nuclear lamina geometry restorer that dissolves progerin-like lamin aggregates and reestablishes peripheral heterochromatin tethering",
+    tags: ["structural", "protein"],
+    class: "Protein-protein interaction disruptor (peptidomimetic)",
+    target: "Lamin A tail domain / progerin-lamin B1 heterotypic interface",
+    mechanism: ["Progerin aggregate dissolution", "Lamin B1 tethering restoration", "Peripheral H3K9me3 anchoring"],
+    design: "A β-turn peptidomimetic (Aib-substituted peptide) that mimics the lamin A CaaX-domain loop and competitively inserts into the progerin–lamin B1 coiled-coil contact, disrupting the stiff aggregates that form in aged cells at the nuclear periphery. Unlike rapamycin (which reduces progerin via autophagy non-specifically), LR-4 acts structurally: it intercalates into the aggregate interface, reducing the interaction energy below the critical threshold for aggregate maintenance. Freed lamin B1 then re-establishes contacts with HP1α–H3K9me3-marked peripheral chromatin, restoring the lamina-associated domain (LAD) architecture that is eroded during normal aging.",
+    novelty: 89,
+    testable: "Lamin A/progerin immunofluorescence morphology; lamin B1 ChIP-seq to confirm LAD restoration; H3K9me3 peripheral enrichment by IF; nuclear mechanics by AFM."
+  },
+  {
+    n: 14,
+    name: "mTORC1AgeCipher-8",
+    tagline: "Selective mTORC1 inhibitor that specifically blocks the TFEB-suppressing arm without affecting cap-dependent translation in post-mitotic cells",
+    tags: ["signaling", "metabolic"],
+    class: "Rapamycin-independent TORC1 allosteric modulator",
+    target: "Raptor–TFEB docking groove (not FRB domain)",
+    mechanism: ["TFEB nuclear translocation", "Lysosomal biogenesis", "Selective mTORC1 decoupling"],
+    design: "A terpenoid-inspired tricyclic scaffold that occupies the raptor TOR-signaling motif (TOS)-binding groove specifically for the TFEB substrate. Classic rapalogs block all mTORC1 substrates (S6K, 4E-BP1, TFEB), which impairs protein synthesis in post-mitotic neurons. This molecule blocks only the raptor groove that docks TFEB's TOS-like motif (FVMVL), leaving S6K/4E-BP1 substrates largely undisturbed. The result: lysosomal biogenesis (via TFEB) is reactivated and age-related lysosomal dysfunction reversed, without the translational suppression that limits rapalogs in neural tissue.",
+    novelty: 93,
+    testable: "TFEB nuclear localization by IF; lysosomal marker LAMP1/LAMP2 quantification; proteomics for autophagy flux (p62, LC3-II); confirm p70-S6K phosphorylation is maintained; cognitive behavioral tests in aged mice."
+  },
+  {
+    n: 15,
+    name: "SirtSwitch-6",
+    tagline: "SIRT6 allosteric activator that specifically stimulates its deacylase activity at aging-associated inflammatory gene promoters",
+    tags: ["epigenetic", "signaling"],
+    class: "SIRT6 allosteric activator (fatty acid mimetic)",
+    target: "SIRT6 acyl-binding hydrophobic tunnel",
+    mechanism: ["H3K9ac erasure at NF-κB targets", "Myristoylation mimicry", "Inflammaging suppression"],
+    design: "A fluorinated fatty acid analog (C12 chain with 3-trifluoromethyl at the ω-end) that inserts into SIRT6's hydrophobic tunnel more stably than natural long-chain fatty acids (which are the endogenous SIRT6 activators). Unlike SIRT6 overexpression (which also deacetylates H3K18ac globally and suppresses oncogene silencing), this activator specifically increases SIRT6's catalytic rate for H3K9ac at NF-κB-bound promoters due to an additional hydrogen-bond donor at C4 of the fluorinated chain that contacts SIRT6's NF-κB-proximal allosteric loop. Suppresses IL-6, TNF-α, and IL-1β transcription without touching SIRT6's DNA repair functions at DSB sites.",
+    novelty: 90,
+    testable: "H3K9ac ChIP-seq at NF-κB targets vs DSB sites; NF-κB p65 binding by ChIP; cytokine secretome by multiplex ELISA; confirm normal SIRT6-mediated DSB repair by γH2AX comet assay."
+  },
+  {
+    n: 16,
+    name: "ProteaFlex-9",
+    tagline: "Proteasome activator PA28γ that selectively clears oxidized and truncated proteins accumulating in aged nuclei",
+    tags: ["protein", "metabolic"],
+    class: "PA28γ allosteric opener (small molecule)",
+    target: "PA28γ–20S proteasome gate interface (C-terminal tail region)",
+    mechanism: ["20S proteasome gate opening", "Nuclear oxidized protein clearance", "Proteostasis restoration"],
+    design: "A spirocyclic oxazine that binds the PA28γ C-terminal tail and stabilizes its open gate conformation on the 20S proteasome α-ring. In aged cells, PA28γ dissociates from 20S as post-translational oxidation of the interface cysteines (C25/C30) weakens the interaction. This molecule makes non-covalent contacts that substitute for the lost thiol–thiol bridge energy, holding PA28γ on 20S. The result: nuclear proteasome activity is restored toward youthful levels, clearing the oxidized H1 variants, truncated cohesin subunits, and misfolded nuclear-pore components that accumulate in aged nuclei and disrupt chromosomal architecture.",
+    novelty: 88,
+    testable: "Nuclear proteasome activity assay (fluorescent peptide substrates); oxyblot for oxidized nuclear proteins; nuclear architecture by super-resolution IF; comet assay for DNA damage reduction."
+  },
+  {
+    n: 17,
+    name: "RIBOAge-Π",
+    tagline: "Small nucleolar RNA mimic that restores rRNA 2′-O-methylation patterns lost during aging, recovering ribosome fidelity",
+    tags: ["rna", "metabolic"],
+    class: "Synthetic snoRNA mimic (chemically modified antisense oligonucleotide)",
+    target: "rRNA 2′-O-methylation sites Am1187, Gm1447 (18S rRNA)",
+    mechanism: ["2′-O-methylation restoration", "Ribosome accuracy recovery", "Translational fidelity"],
+    design: "A 2′-OMe phosphorothioate antisense oligonucleotide (20 nt) that forms a C/D box snoRNA-like structure when folded, guiding the endogenous fibrillarin methyltransferase to rRNA sites Am1187 and Gm1447 that are hypomethylated in aged cells. These specific positions are critical for A-site fidelity during decoding; their demethylation in aging correlates with increased +1 frameshifting and readthrough errors. The oligo mimics the box D' guide region, anchoring fibrillarin at the target site. Delivery via lipid nanoparticle to the nucleolus, where snoRNAs naturally localize.",
+    novelty: 94,
+    testable: "RiboMeth-seq to map 2′-O-methylation across rRNA; reporter assay for frameshifting frequency; polysome profiling; proteomics for truncated/misincorporated peptide species in aged vs treated cells."
+  },
+  {
+    n: 18,
+    name: "MethylClock-Breaker-II",
+    tagline: "De novo DNMT3B inhibitor targeting only aging-drift CpG methylation without blocking embryonic methylation programs",
+    tags: ["epigenetic"],
+    class: "DNMT3B selective allosteric inhibitor",
+    target: "DNMT3B PWWP domain (H3K36me2/3 reader)",
+    mechanism: ["H3K36me2-guided de novo methylation block", "Horvath clock reversal", "Gene body hypomethylation correction"],
+    design: "A naphthalimide-piperazine conjugate that occupies the DNMT3B PWWP domain's H3K36me2/3-reading aromatic cage (W295/Y315/R304 triad), preventing DNMT3B from being recruited to H3K36me2-rich gene bodies that accumulate aging-associated methylation. Importantly, DNMT3B's catalytic and DNMT3L-interaction domains are untouched, preserving its embryonic function. The PWWP blocker thus specifically prevents the DNMT3B mislocalization that drives drift methylation at Polycomb targets — the primary component of the Horvath clock — without affecting maintenance methylation at imprints or constitutive heterochromatin. Selectivity over DNMT3A's PWWP domain is achieved by exploiting a DNMT3B-unique P302/V308 surface adjacent to the cage.",
+    novelty: 95,
+    testable: "DNMT3B ChIP-seq before/after; WGBS to map CpG methylation changes; Horvath clock scoring; confirm imprinting control regions (IGF2/H19, Snrpn) are unmethylated (preserved); embryoid body formation assay confirms no embryonic defect."
+  },
+  {
+    n: 19,
+    name: "SenoDecode-Φ",
+    tagline: "SASP factor-selective translational repressor that inhibits IL-6/IL-8 synthesis post-transcriptionally while preserving anti-tumor cytokine production",
+    tags: ["signaling", "rna"],
+    class: "eIF4E–4E-BP1 axis modulator (cap-selective)",
+    target: "eIF4G–eIF4E–m⁷G cap ternary complex (selective)",
+    mechanism: ["SASP mRNA cap-dependent translation block", "IL-6/IL-8 suppression", "IFN-γ preservation"],
+    design: "A pyridinyl-triazole compound that inserts between the eIF4E–eIF4G interface via a hydrophobic wedge, but includes a polyamine tail that extends into a minor groove-contacting position unique to the highly structured 5′ UTRs of IL-6/IL-8 mRNAs (which have long G-rich 5′ UTRs forming secondary structure). The minor groove contact confers selectivity: the compound only stalls ribosome loading on mRNAs whose 5′ UTR secondary structure forces the ribosome to pause at the position where the polyamine tail is lodged. IFN-γ and perforin mRNAs (which have short unstructured 5′ UTRs) are unaffected. Translational SASP suppression without immunosuppression.",
+    novelty: 92,
+    testable: "Ribosome footprinting (Ribo-seq) in senescent cells; cytokine secretome by multiplex ELISA; compare IL-6/IL-8 vs IFN-γ ratio; flow cytometry for NK cell killing of pre-malignant targets co-cultured with treated senescent cells."
+  },
+  {
+    n: 20,
+    name: "NeuroReboot-α1",
+    tagline: "Electrophysiology-coupled epigenetic remodeler: action potential-gated delivery of a KDM6A (UTX) activator to depolarized neurons",
+    tags: ["epigenetic", "signaling"],
+    class: "Voltage-gated prodrug (Ca²⁺/CaMKIV-activatable)",
+    target: "KDM6A (UTX) H3K27me3 demethylase + CREB target loci",
+    mechanism: ["Activity-gated H3K27me3 demethylation", "CREB target gene opening", "Memory trace reactivation"],
+    design: "A cage compound where a KDM6A activating peptide is locked by a photocleavable-analog linker sensitive to CaMKIV phosphorylation (not light, but the kinase). In a resting neuron, the compound is inert. Upon action potential firing, Ca²⁺ influx activates CaMKIV, which phosphorylates a serine on the linker cage, releasing the KDM6A activator. This spatially and temporally couples H3K27me3 demethylation at CREB target genes to neuronal activity — precisely the coupling that is lost in aged neurons where silent CREB targets accumulate H3K27me3. Aged neurons with impaired long-term potentiation regain access to activity-dependent gene programs because the epigenetic barrier is lifted only in the neurons that are actually firing.",
+    novelty: 97,
+    testable: "Electrophysiology + H3K27me3 ChIP-seq in patch-clamped aged hippocampal neurons; activity-dependent gene expression (c-Fos, BDNF Arc) by smFISH; fear conditioning / spatial memory in aged mouse models."
+  }
+];
+
+const tagLabels = {
+  epigenetic: "Epigenetic",
+  structural: "Chromatin structural",
+  metabolic: "Metabolic",
+  signaling: "Signaling",
+  rna: "RNA / non-coding",
+  protein: "Protein targeting"
+};
+
+function tagClass(t) {
+  return `tag tag-${t}`;
+}
+
+function renderCards(filter) {
+  const grid = document.getElementById('mol-grid');
+  const countEl = document.getElementById('count-label');
+  const filtered = filter === 'all' ? molecules : molecules.filter(m => m.tags.includes(filter));
+  countEl.textContent = `Showing ${filtered.length} molecule${filtered.length !== 1 ? 's' : ''} — click any to expand`;
+  grid.innerHTML = filtered.map(m => `
+    <div class="mol-card" data-id="${m.n}" onclick="toggleCard(${m.n})">
+      <div class="mol-header">
+        <div class="mol-number">${m.n < 10 ? '0' + m.n : m.n}</div>
+        <div class="mol-main">
+          <div class="mol-name">${m.name}</div>
+          <div class="mol-tagline">${m.tagline}</div>
+          <div class="mol-tags">
+            ${m.tags.map(t => `<span class="${tagClass(t)}">${tagLabels[t]}</span>`).join('')}
+          </div>
+        </div>
+        <div class="mol-chevron">⌄</div>
+      </div>
+      <div class="mol-detail">
+        <div class="detail-section">
+          <div class="detail-label">Class</div>
+          <div class="detail-text">${m.class}</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Primary target</div>
+          <div class="detail-text">${m.target}</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Mechanisms</div>
+          <div class="mechanism-row">${m.mechanism.map(x => `<span class="mech-pill">${x}</span>`).join('')}</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Design rationale</div>
+          <div class="detail-text">${m.design}</div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-label">Experimental test</div>
+          <div class="detail-text">${m.testable}</div>
+        </div>
+        <div class="novelty-bar">
+          <div class="detail-label">Conceptual novelty estimate: ${m.novelty}%</div>
+          <div class="novelty-track"><div class="novelty-fill" style="width:${m.novelty}%"></div></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleCard(id) {
+  const card = document.querySelector(`[data-id="${id}"]`);
+  card.classList.toggle('open');
+}
+
+document.getElementById('filters').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCards(btn.dataset.filter);
+});
+
+renderCards('all');
+</script>
