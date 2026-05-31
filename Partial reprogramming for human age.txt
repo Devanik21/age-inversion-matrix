@@ -1,0 +1,32 @@
+Partial reprogramming for human age reversal needs chemistry that borrows the logic of Oct4, Sox2, Klf4 and c-Myc but avoids permanent pluripotency or oncogenic lock-in. The 20 below are conceptual scaffolds designed from first principles, not copied from existing drugs. Each aims for transient activation, built-in off-switches, and tissue-restricted action.
+
+## Design logic
+We treat each Yamanaka factor as a function to mimic, not a protein to overexpress. Oct4 and Sox2 are pioneer-cooperative DNA openers. Klf4 is a brake on senescence via p21 and TERT. c-Myc is a metabolic amplifier that must be time-limited. The molecules below use non-natural backbones, degradation timers, and epigenetic readers to keep activity to hours, not days.
+
+## The 20 conceptual molecules
+
+| ID | Mimics | Class | Mechanism | Novelty that limits aging risk |
+| --- | --- | --- | --- | --- |
+| XYL-REV-01 | Oct4 | Stapled helical peptidomimetic | Binds octamer ATGCAAAT and recruits endogenous Sox2 to open enhancers | Hydrocarbon staple with 4-guanidino-phenylalanine gives DNA contact without viral delivery |
+| XYL-REV-02 | Oct4 | Bivalent BRD4-polyamide | Tethers BRD4 to POU5F1 distal enhancer to deposit H3K27ac | JQ1 analog linked to sequence-specific minor-groove binder for DE only |
+| XYL-REV-03 | Oct4 | Molecular glue degrader | Removes MBD3-NuRD repressor from Oct4 promoter for 12 hours | Plant-derived degron ligand enables timed clearance not seen in human cells |
+| XYL-REV-04 | Oct4 | Locked nucleic acid mimic | Blocks miR-145 and miR-335 binding to POU5F1 3'UTR | Tricyclic morpholino sugar resists nucleases and raises Oct4 protein transiently |
+| XYL-REV-05 | Oct4 | Photo-caged pioneer | Opens closed chromatin at Oct4-Sox2 composite sites | Artificial zinc array fused to p300 recruiter via UV-cleavable linker |
+| XYL-REV-06 | Sox2 | Crescent polyamide | Induces 75-degree DNA bend mimicking Sox2 HMG box | N-methylpyrrole-imidazole trimer capped with isoquinoline for shape selectivity |
+| XYL-REV-07 | Sox2 | D-peptide heterodimer clamp | Stabilizes Oct4-Sox2 interface on DNA | Beta-hairpin of D-amino acids bridges both DBDs lowering reprogramming threshold |
+| XYL-REV-08 | Sox2 | Allosteric WWP2 inhibitor | Prevents Sox2 ubiquitination and degradation | Spirocyclic oxindole occupies WW exosite not catalytic site |
+| XYL-REV-09 | Sox2 | Acetyl-CoA prodrug | Delivers acetyl group to p300-Sox2 complex | Thioester masked by esterase cage increases Sox2 K75 acetylation |
+| XYL-REV-10 | Sox2 | Bivalent MED15 recruiter | Brings Mediator to Sox2 targets without full Sox2 overexpression | Polyamide-DNA binder linked to MED15-binding peptoid |
+| XYL-REV-11 | Klf4 | Metal-free zinc finger mimic | Binds GC-box CACCC to activate Klf4 targets | BODIPY core positions histidine mimics to replace zinc |
+| XYL-REV-12 | Klf4 | Partial agonist isoflavone | Upregulates TERT and represses p21 without c-Myc coactivation | 3'-sulfonamide switch alters cofactor recruitment profile |
+| XYL-REV-13 | Klf4 | PPI inhibitor | Blocks Klf4-p53 pro-apoptotic interaction | Cyclohexyl-proline macrocycle shields interface |
+| XYL-REV-14 | Klf4 | Epigenetic bifunctional | Reads H3K4me1 and deposits Klf4 at enhancers | PHD mimetic linked to Klf4 zinc finger via PEG tether |
+| XYL-REV-15 | Klf4 | Phosphodegron shield | Masks Klf4 S62 phosphosite from FBXW7 | Cis-locked phosphoserine mimetic prolongs Klf4 half-life |
+| XYL-REV-16 | c-Myc | Timed dimerizer | Induces Myc-MAX for 4 hours then self-hydrolyzes | Ester-linked rapalog with built-in timer prevents oncogenic persistence |
+| XYL-REV-17 | c-Myc | Metabolic Box I mimic | Activates glycolysis and nucleotide synthesis genes without DNA binding | Naphthoquinone scaffold mimics Myc Box I TRRAP interaction |
+| XYL-REV-18 | c-Myc | Mitochondria-targeted peptide | Recruits TRRAP to mitochondrial biogenesis promoters only | Triphenylphosphonium-tagged Myc Box II peptoid limits nuclear oncogenes |
+| XYL-REV-19 | c-Myc | Shape-selective intercalator | Stabilizes Myc-MAX on E-boxes flanked by AT-rich DNA | Prefers rejuvenation-associated loci over canonical oncogenic targets |
+| XYL-REV-20 | c-Myc | Caged TET activator | Demethylates Myc-bound enhancers for one reprogramming wave | Vitamin C analog linked to Myc binder with photocage for light control |
+
+## What to do next
+These are paper concepts only. Any synthesis, cell testing, or animal work will require full validation by qualified molecular biologists, medicinal chemists, and institutional biosafety and ethics review. Do not attempt human use. If you take these to top labs, start with in vitro half-life, off-target transcriptomics, and cancer-safety assays before any age-reversal phenotyping.
