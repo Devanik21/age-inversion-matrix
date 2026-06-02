@@ -1,0 +1,154 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+body{font-family:var(--font-sans,sans-serif)}
+.ideas{padding:1rem 0 0.5rem}
+.idea-card{border:0.5px solid var(--color-border-tertiary);border-radius:12px;background:var(--color-background-primary);margin-bottom:10px;overflow:hidden;transition:border-color 0.15s}
+.idea-card:hover{border-color:var(--color-border-secondary)}
+.idea-card.open{border-color:var(--color-border-primary)}
+.idea-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;user-select:none}
+.idea-num{font-size:11px;font-weight:500;color:var(--color-text-tertiary);min-width:18px;padding-top:3px}
+.idea-center{flex:1;min-width:0}
+.idea-name{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.35}
+.idea-hook{font-size:12px;color:var(--color-text-secondary);margin-top:4px;line-height:1.5}
+.idea-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.pill{font-size:10px;font-weight:500;padding:2px 7px;border-radius:10px}
+.pill-p{background:#EEEDFE;color:#3C3489}
+.pill-t{background:#E1F5EE;color:#085041}
+.pill-a{background:#FAEEDA;color:#633806}
+.pill-c{background:#FAECE7;color:#712B13}
+.pill-g{background:#EAF3DE;color:#27500A}
+.idea-chev{font-size:16px;color:var(--color-text-tertiary);transition:transform 0.2s;padding-top:2px;flex-shrink:0}
+.idea-card.open .idea-chev{transform:rotate(180deg)}
+.idea-body{display:none;padding:0 16px 16px 46px;border-top:0.5px solid var(--color-border-tertiary)}
+.idea-card.open .idea-body{display:block}
+.section{margin-top:12px}
+.slabel{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px}
+.stext{font-size:13px;color:var(--color-text-secondary);line-height:1.65}
+.stext strong{font-weight:500;color:var(--color-text-primary)}
+.mrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.mchip{font-size:11px;padding:3px 9px;border-radius:10px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)}
+.actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.actions button{font-size:12px;padding:5px 12px;border-radius:8px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;font-family:var(--font-sans,sans-serif)}
+.actions button:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
+</style>
+
+<h2 class="sr-only">Five paradigm-breaking ideas proposed in generator mode, each expandable with full design rationale and testable predictions.</h2>
+
+<div class="ideas" id="ideas"></div>
+
+<script>
+const IDEAS = [
+  {
+    n:1,
+    name:"Topological memory encoding in neuronal cytoskeletal braids",
+    hook:"Long-term memory is not stored in synaptic weights — it is stored as topological invariants (knot classes) in the microtubule-actin braid geometry inside individual neurons.",
+    pills:[{t:"Neuroscience",c:"pill-p"},{t:"Topology",c:"pill-t"},{t:"First principles",c:"pill-a"}],
+    field:"Theoretical neuroscience / biophysics",
+    problem:"Synaptic weight theory cannot explain memory persistence across protein turnover. Every synaptic protein is replaced within days to weeks; yet memories last decades. There is no known mechanism for this persistence.",
+    insight:"Start from first principles: what physical structures are topologically stable against molecular replacement? Answer — knots and braids. A knotted polymer retains its knot class even if every monomer is swapped. Neuronal cytoskeletons contain tightly regulated microtubule–actin networks. If the braid topology (crossing number, writhe, linking number) of these networks encodes information, that encoding persists through turnover because new monomers must thread through the existing topology to integrate. Memory is then not a weight but a topological invariant — unchanged by protein replacement, destroyed only by cutting the filament (i.e. trauma, neurodegeneration).",
+    mechanisms:["Microtubule braid topology as information carrier","Knot invariants as memory addresses","Topology-preserving polymerization","Enzymatic 'writing' via topoisomerase analogs"],
+    predict:"Inhibiting topoisomerase-II in neurons mid-learning disrupts long-term but not short-term memory. Super-resolution microscopy of cytoskeletal networks in trained vs untrained neurons reveals statistically distinct braid topologies. Memory consolidation correlates with cytoskeletal crosslinking enzyme activity, not with AMPA receptor insertion.",
+    debate:"Enter debate mode: attack the topological memory hypothesis — find every physical, biological and logical flaw"
+  },
+  {
+    n:2,
+    name:"Entropic gene regulation — the cell uses thermal noise as a programmable input",
+    hook:"Transcription factor binding is not fighting noise — it is deliberately harnessing thermodynamic fluctuations as a high-dimensional analog input to compute gene expression states unreachable by deterministic circuits.",
+    pills:[{t:"Statistical physics",c:"pill-t"},{t:"Gene regulation",c:"pill-p"},{t:"Information theory",c:"pill-a"}],
+    field:"Theoretical biology / biophysics",
+    problem:"Stochastic gene expression is widely treated as noise to be buffered. But the level of cell-to-cell variability in gene expression is precisely controlled and cell-type specific. Why would evolution carefully tune noise levels if noise is only a nuisance?",
+    insight:"From first principles of information theory: a system that uses only deterministic inputs has a finite, bounded computational capacity. A system that uses thermal fluctuations as a stochastic input channel can compute probability distributions over cell states — entire landscapes, not points. The chromatin accessibility landscape of a cell is a probability distribution over gene-expression microstates. Evolution may have shaped promoter architectures not to minimize noise but to sculpt the shape of the noise — the covariance structure of stochastic fluctuations — so that rare but reproducible transcriptional bursts sample specific attractor states. Noise is the programming language. Chromatin is the compiler.",
+    mechanisms:["Promoter architecture as noise-shaping filter","Transcriptional bursting as stochastic sampling","Covariance structure of fluctuations as regulatory signal","Cell fate transitions as noise-driven attractor escapes"],
+    predict:"Cells with artificially reduced transcriptional noise (via synthetic polymerase fidelity enhancers) fail to undergo developmental transitions at correct frequencies despite correct average expression levels. The covariance matrix of single-cell expression fluctuations is a better predictor of developmental potency than mean expression. Reconstructing the covariance structure of a terminally differentiated cell's noise toward an embryonic pattern induces partial reprogramming.",
+    debate:"Enter debate mode: attack the entropic gene regulation hypothesis — find every physical, biological and logical flaw"
+  },
+  {
+    n:3,
+    name:"Morphogenetic field computation — tissue geometry solves differential equations in physical space",
+    hook:"Developing embryos do not run a genetic program. They are analog computers: the physical geometry of the tissue IS the computation, solving reaction-diffusion PDEs in wetware with no digital intermediary.",
+    pills:[{t:"Developmental biology",c:"pill-c"},{t:"PDEs / physics",c:"pill-t"},{t:"Computation theory",c:"pill-g"}],
+    field:"Theoretical developmental biology",
+    problem:"The gap between genotype and phenotype is unbridged. We have no predictive theory that takes a genome and outputs a body plan. Turing's reaction-diffusion is the closest thing — but it is treated as a metaphor, not taken seriously as a physical computational substrate.",
+    insight:"From first principles of computation theory: any physical system that implements a reaction-diffusion PDE on a spatially continuous medium is performing universal analog computation. A developing embryo's signaling gradients (Bicoid, Nodal, BMP, Wnt) are boundary-value problems being solved in physical space. The genome does not encode the body plan — it encodes the parameters and boundary conditions of the PDE system, and physics solves the rest. The profound implication: body-plan phenotypes are attractors of the PDE, not instructions from the genome. Mutations alter PDE parameters; robustness is PDE attractor stability; evolutionary transitions are bifurcations in the PDE parameter space.",
+    mechanisms:["Morphogen gradients as PDE boundary conditions","Tissue geometry as the computational domain","Cell fate decisions as PDE attractor basins","Robustness = attractor stability radius"],
+    predict:"A given body-plan feature can be reproduced in an evolutionarily distant species by transplanting only the morphogen diffusion constants and production rates — not any specific gene sequence. In organoid culture, imposing boundary conditions that match a known PDE attractor spontaneously drives correct tissue patterning without any genetic manipulation. Teratomas form not randomly but along predictable PDE attractor paths from the initial conditions of the tumor.",
+    debate:"Enter debate mode: attack the morphogenetic field computation hypothesis — find every physical, biological and logical flaw"
+  },
+  {
+    n:4,
+    name:"Causal decoupling spectroscopy — inferring hidden causal graphs directly from non-equilibrium fluctuation spectra",
+    hook:"The causal graph of any physical system is encoded in the frequency-domain structure of its non-equilibrium fluctuations. We can read it out without intervention, using only passive observation.",
+    pills:[{t:"Causal inference",c:"pill-p"},{t:"Non-equilibrium physics",c:"pill-a"},{t:"Spectral theory",c:"pill-t"}],
+    field:"Theoretical statistics / physics",
+    problem:"Causal inference currently requires either randomized experiments (interventions) or strong structural assumptions (no hidden confounders, acyclicity, faithfulness). Neither is available in most real complex systems — brains, economies, ecosystems, gene networks.",
+    insight:"From first principles of non-equilibrium statistical mechanics: a system driven away from equilibrium by causal forcing develops characteristic asymmetries in its fluctuation power spectrum. Specifically, the cross-spectral density matrix of a causally coupled system has a phase structure that encodes the direction of information flow — not just correlation but causality. The fluctuation-dissipation theorem links response functions to equilibrium fluctuations; its non-equilibrium generalization links the causal graph to the asymmetric part of the power spectral density tensor. This gives a fully passive, intervention-free method to recover the causal graph of any system that is measurably out of equilibrium — which includes all living systems and most interesting physical ones.",
+    mechanisms:["Asymmetric cross-spectral density as causal signature","Non-equilibrium FDT as the mathematical bridge","Tensor decomposition of spectral asymmetry","Passive causal graph recovery algorithm"],
+    predict:"Applied to fMRI data, the method recovers the known efferent/afferent connectivity structure of visual cortex with no prior anatomical knowledge and no experimental intervention. Applied to gene expression time-series, it outperforms Granger causality on benchmark networks. A rigorous theorem: for any Markovian system with a known steady-state energy dissipation rate, the full causal graph is recoverable from the spectral asymmetry up to a specific equivalence class.",
+    debate:"Enter debate mode: attack the causal decoupling spectroscopy hypothesis — find every physical, biological and logical flaw"
+  },
+  {
+    n:5,
+    name:"Cognitive light-cone theory — the geometry of possible futures accessible to an intelligent system is bounded by a causal horizon analogous to spacetime",
+    hook:"Intelligence has a fundamental geometric limit: just as no signal can exit a black hole's light-cone, no cognitive agent can reason about futures outside its causal inference horizon — a hard bound derivable from information theory and causal structure alone.",
+    pills:[{t:"AGI theory",c:"pill-p"},{t:"Causal inference",c:"pill-t"},{t:"Information geometry",c:"pill-a"}],
+    field:"Theoretical AI / foundations of intelligence",
+    problem:"There is no agreed-upon theoretical framework bounding what any intelligent system — biological or artificial — can in principle predict or plan. Existing complexity bounds (Kolmogorov, VC dimension, PAC learning) are about learning from data, not about the fundamental limits of forward causal reasoning.",
+    insight:"From first principles of causal inference and information geometry: an agent reasoning about the future is computing interventional and counterfactual distributions (Pearl's do-calculus). These computations require a causal model whose depth (number of structural equations between action and outcome) sets a horizon. Beyond this horizon, the probability of any predicted event converges to the marginal distribution — the agent is statistically blind. This horizon depends on: (1) the agent's causal model complexity, (2) the environment's causal depth, and (3) the available information bandwidth. The result is a light-cone geometry in causal-depth × time space: a hard boundary beyond which prediction is information-theoretically impossible regardless of compute. Critically, this is NOT the halting problem or undecidability — it is a quantitative, finite bound on effective prediction.",
+    mechanisms:["Causal model depth as the cone's opening angle","Information bandwidth as propagation speed","Interventional horizon as the cone boundary","Counterfactual blindness beyond the horizon"],
+    predict:"A formal theorem: for any agent with causal model of depth d acting in an environment of causal depth D, the mutual information between the agent's best prediction and the actual future decays exponentially with prediction horizon scaled by D/d. Empirically: LLMs and RL agents should show a characteristic cliff in prediction accuracy at a horizon that scales with their architecture's implicit causal depth, not their training data size. This predicts the existence of a 'causal horizon gap' between agents — not an intelligence gap.",
+    debate:"Enter debate mode: attack the cognitive light-cone theory — find every physical, biological and logical flaw"
+  }
+];
+
+function render() {
+  const container = document.getElementById('ideas');
+  container.innerHTML = IDEAS.map(idea => `
+    <div class="idea-card" id="card${idea.n}" onclick="toggle(${idea.n})">
+      <div class="idea-header">
+        <div class="idea-num">0${idea.n}</div>
+        <div class="idea-center">
+          <div class="idea-name">${idea.name}</div>
+          <div class="idea-hook">${idea.hook}</div>
+          <div class="idea-pills">${idea.pills.map(p=>`<span class="pill ${p.c}">${p.t}</span>`).join('')}</div>
+        </div>
+        <div class="idea-chev">⌄</div>
+      </div>
+      <div class="idea-body">
+        <div class="section">
+          <div class="slabel">Field</div>
+          <div class="stext">${idea.field}</div>
+        </div>
+        <div class="section">
+          <div class="slabel">The gap it fills</div>
+          <div class="stext">${idea.problem}</div>
+        </div>
+        <div class="section">
+          <div class="slabel">First-principles derivation</div>
+          <div class="stext">${idea.insight}</div>
+        </div>
+        <div class="section">
+          <div class="slabel">Core mechanisms</div>
+          <div class="mrow">${idea.mechanisms.map(m=>`<span class="mchip">${m}</span>`).join('')}</div>
+        </div>
+        <div class="section">
+          <div class="slabel">Falsifiable predictions</div>
+          <div class="stext">${idea.predict}</div>
+        </div>
+        <div class="actions">
+          <button onclick="event.stopPropagation();sendPrompt('${idea.debate}')">Debate this idea ↗</button>
+          <button onclick="event.stopPropagation();sendPrompt('Enter evolve mode: synthesize a deeper version of idea ${idea.n} — ${idea.name}')">Evolve this idea ↗</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggle(n) {
+  const card = document.getElementById('card'+n);
+  card.classList.toggle('open');
+}
+
+render();
+</script>
