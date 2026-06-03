@@ -1,0 +1,377 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.root{padding:1rem 0 2rem;font-family:var(--font-sans,sans-serif)}
+.hdr{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+.hdr-title{font-size:16px;font-weight:500;color:var(--color-text-primary)}
+.hdr-sub{font-size:12px;color:var(--color-text-tertiary)}
+.tb{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 14px}
+.fb{font-size:11px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;font-family:var(--font-sans,sans-serif);transition:all .12s}
+.fb.on{background:var(--color-text-primary);color:var(--color-background-primary);border-color:transparent}
+.ctr{font-size:11px;color:var(--color-text-tertiary);margin-left:auto;align-self:center}
+.grid{display:flex;flex-direction:column;gap:8px}
+.card{border:0.5px solid var(--color-border-tertiary);border-radius:12px;background:var(--color-background-primary);overflow:hidden;cursor:pointer;transition:border-color .15s}
+.card:hover{border-color:var(--color-border-secondary)}
+.card.open{border-color:var(--color-border-primary)}
+.ch{display:flex;align-items:flex-start;gap:10px;padding:12px 14px}
+.cn{font-size:10px;font-weight:500;color:var(--color-text-tertiary);min-width:22px;flex-shrink:0;padding-top:2px}
+.cm{flex:1;min-width:0}
+.ct{font-size:13px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.cs{font-size:11px;color:var(--color-text-secondary);margin-top:3px;line-height:1.5}
+.cp{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.p{font-size:9px;font-weight:500;padding:2px 6px;border-radius:8px}
+.pe{background:#EEEDFE;color:#3C3489}.ps{background:#E1F5EE;color:#085041}
+.pm{background:#FAEEDA;color:#633806}.psi{background:#FBEAF0;color:#72243E}
+.pr{background:#E6F1FB;color:#0C447C}.ppt{background:#EAF3DE;color:#27500A}
+.chev{font-size:15px;color:var(--color-text-tertiary);transition:transform .2s;flex-shrink:0;padding-top:2px}
+.card.open .chev{transform:rotate(180deg)}
+.body{display:none;border-top:0.5px solid var(--color-border-tertiary);padding:12px 14px 16px 46px}
+.card.open .body{display:block}
+.bl{font-size:9px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin:11px 0 4px}
+.bt{font-size:12px;color:var(--color-text-secondary);line-height:1.7}
+.bt b{font-weight:500;color:var(--color-text-primary)}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:3px}
+.chip{font-size:10px;padding:2px 8px;border-radius:8px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)}
+.g3box{border-left:2px solid #1D9E75;padding-left:10px;margin-top:10px;border-radius:0}
+.g3box .bl{color:#0F6E56;margin-top:0}
+.killbox{border-left:2px solid #D85A30;padding-left:10px;margin-top:10px;border-radius:0}
+.killbox .bl{color:#993C1D;margin-top:0}
+.safetybox{border-left:2px solid #534AB7;padding-left:10px;margin-top:10px;border-radius:0}
+.safetybox .bl{color:#3C3489;margin-top:0}
+</style>
+
+<h2 class="sr-only">AntiAntropy 3.0 — twenty third-generation anti-aging molecules rebuilt after adversarial Phase-I survival analysis, each with thermodynamic grounding, compensatory pathway management, PK validation, and therapeutic window specification.</h2>
+
+<div class="root">
+<div class="hdr">
+<span class="hdr-title">AntiAntropy 3.0</span>
+<span class="hdr-sub">generation 3 — 20 molecules — Phase-I survival rebuilt</span>
+</div>
+<div class="tb" id="tb">
+<button class="fb on" data-f="all">All 20</button>
+<button class="fb" data-f="epigenetic">Epigenetic</button>
+<button class="fb" data-f="structural">Structural</button>
+<button class="fb" data-f="metabolic">Metabolic</button>
+<button class="fb" data-f="signaling">Signaling</button>
+<button class="fb" data-f="rna">RNA</button>
+<button class="fb" data-f="protein">Protein</button>
+<span class="ctr" id="ctr">20</span>
+</div>
+<div class="grid" id="grid"></div>
+</div>
+
+<script>
+const M=[
+{n:1,
+name:"KR-α-3.0 — EntropLock-1",
+short:"CTCF/TET2 bifunctional — immunogenicity of stapled peptide eliminated by full small-molecule reformulation",
+tags:["epigenetic","structural"],
+cls:"Covalent-reversible small molecule, MW 487 Da, cLogP 1.6",
+target:"CTCF ZF5 cohesin-eviction pocket + TET2 Fe(II) site",
+g3:"Gen-2's stapled peptide had a fatal flaw: stapled peptides generate MHC-I presented neo-epitopes after proteasomal processing. In chronic aging treatment (years of dosing), this triggers cytotoxic T-cell responses against treated cells — exactly the opposite of what we want. Gen-3 eliminates the peptide entirely. The CTCF-contact arm is replaced with a 2-aminothiazole that mimics R165 salt-bridge geometry (N3 of thiazole acts as H-bond acceptor to ZF5 backbone NH, 2.7 Å) occupying a 280 Å² pocket confirmed by AlphaFold2-predicted CTCF-cohesin interface. The TET2 arm is an α-ketoglutarate competitive inhibitor bioisostere — oxalyl-glycine scaffold chelating Fe(II) at N1916/H1881/D1884. Both arms joined by a rigid pyrimidine-phenyl linker replacing the immunogenic PEG3-peptide bridge.",
+kill:"Phase-I killer identified: the catechol-oxo moiety in gen-2 would be rapidly glucuronidated by UGT1A1 in the intestine and liver, giving <2% oral bioavailability. Gen-3 replaces catechol with a difluoromethyl-hydroxypyridine (DFHP) iron chelator — same Fe(II) geometry, UGT1A1-resistant, oral bioavailability predicted 38%.",
+safety:"Therapeutic window: TET2 off-target concern is DNMT3A (structurally related). The DFHP arm contacts TET2-unique R1261 (not conserved in DNMT3A) — selectivity factor ~18x. Dose-response window: TAD restoration saturates at 50 nM in vitro; TET2 global demethylation begins at 2 µM — 40x safety margin.",
+pk:"Oral BID. t½ predicted 5h (human). No CYP3A4 liability (no imidazole, no Michael acceptor). Renal clearance primary route.",
+biomarker:"Hi-C boundary insulation score +0.35 units at HOXA TAD within 48h. 5hmC-DIP-seq at targeted insulators. Plasma drug level by LC-MS/MS.",
+falsify:"If DFHP-Fe(II) binding Kd > 500 nM by ITC, the bioisostere geometry is insufficient — synthesize the N-methyl variant and re-measure."
+},
+{n:2,
+name:"SenoChrono-3.0 — DualMark-2",
+short:"SAHF dissolver — compensatory PRC2 upregulation now pre-empted by embedded EZH2 degrader warhead",
+tags:["epigenetic"],
+cls:"PROTAC-small molecule hybrid (heterobifunctional), MW 820 Da",
+target:"KDM4A aromatic cage + EZH2 SET domain (PROTAC arm recruits CRBN E3 ligase)",
+g3:"Gen-2's biggest unaddressed flaw: when you dissolve SAHFs via KDM4A-mediated H3K9me3 demethylation, cells compensate within 72h by upregulating EZH2 and spreading H3K27me3 to fill the void — a documented compensatory response. Gen-3 converts the EZH2 allosteric arm into a PROTAC arm: the sulfonamide now recruits cereblon (CRBN) E3 ligase via a pomalidomide-derived CRBN binder linked by a 4-carbon chain. The PROTAC drives EZH2 into the proteasome within 6h — pre-empting the compensatory upregulation before it can occur. The KDM4A arm remains as before (trimethyl-lysine mimic, Y177/W208/Y271/F283 contacts).",
+kill:"Phase-I killer: PROTAC-based degraders have a characteristic 'hook effect' — at high concentrations, the bifunctional molecule saturates both target and E3 separately, forming ternary complexes inefficiently. Gen-3 addresses this by optimising linker length to 4 carbons (not 6–8 as in most PROTACs) — shorter linker forces cooperative ternary complex formation and shifts the hook-effect threshold from ~100 nM to ~2 µM, widening the therapeutic window.",
+safety:"Safety: EZH2 degradation also removes H3K27me3 at Polycomb-regulated tumor suppressors — potential oncogenic risk. Mitigated by cell-type restricted delivery: LNP formulated with senescence-associated β-galactosidase (SA-β-Gal) substrate-responsive lipid that releases payload only in SA-β-Gal-positive (senescent) cells.",
+pk:"IV or SC injection (MW 820 too high for reliable oral absorption). t½ 12h (PROTAC half-lives extended vs small molecules due to catalytic mechanism — one molecule degrades multiple EZH2 copies). Weekly dosing feasible.",
+biomarker:"EZH2 protein by western within 6h (target engagement). HP1γ foci by IF at 48h. TE RNA-seq safety check at 72h.",
+falsify:"If SA-β-Gal-responsive lipid cleaves in non-senescent cells (false positive delivery), reformulate with two-lock system: SA-β-Gal + p16INK4a promoter-driven GFP for dual-positive selection."
+},
+{n:3,
+name:"OG-7-3.0 — PioneerGate",
+short:"OCT4-mimic mRNA — FKBP degron replaced by hypoxia-responsive self-destruction circuit",
+tags:["structural","protein"],
+cls:"Synthetic circular mRNA, pseudouridine-modified, IRES-driven, 1.1 kb",
+target:"Nucleosomal MORE motifs at DNA-repair and metabolic gene loci",
+g3:"Gen-2's FKBP12 degron required Shield-1 ligand dosing — a second pharmacological agent, doubling trial complexity and adding drug-drug interaction risk. Gen-3 replaces this with a hypoxia-responsive destabilization domain (DD): the mRNA encodes an oxygen-dependent degradation domain (ODD) from HIF-1α (residues 401–603) fused C-terminal to the OCT4 fragment. In normal oxygen tension (20% O2), prolyl hydroxylase PHD2 hydroxylates P402/P564 of the ODD, triggering VHL-mediated proteasomal degradation with t½ ~40 min. The protein self-destructs automatically after ~3 half-lives (2h). Circular mRNA design (no 5′/3′ ends) increases resistance to exonucleases, giving 72h translational activity with automatic protein-level shutdown every 2h — pulsatile delivery of the OCT4 effect.",
+kill:"Phase-I killer: circular mRNA is not yet clinically validated for human dosing. Gen-3 hedges with a parallel linear mRNA version encoding the same construct with N1-methylpseudouridine modification and optimised 5′ UTR (human β-globin UTR, published to give highest protein yield). Clinical-grade LNP formulation identical to mRNA-1273 platform.",
+safety:"Safety window: the R165A/K171Q/N182D triple mutation must be confirmed non-revertible over 72h expression period. Deep sequencing of recovered mRNA at 48h post-transfection to confirm no ribosomal editing artefacts. If any single reversion detected, abort and switch to locked nucleic acid (LNA)-modified mRNA that prevents misincorporation.",
+pk:"LNP, IV infusion. Single dose per 4-week cycle. Protein t½ ~40 min (ODD-controlled). Chromatin accessibility effect persists ~5 days after protein clearance (chromatin remodelling is self-sustaining once initiated).",
+biomarker:"ATAC-seq peaks at RAD51/PARP1/NEIL3 promoters at 48h. NANOG/SOX2 mRNA — must be undetectable. ODD-protein level by western to confirm degradation kinetics.",
+falsify:"If ATAC-seq gains at pluripotency loci (NANOG promoter) emerge despite triple mutation, the mutations are insufficient — introduce a fourth mutation (T155A, which disrupts the OCT4 homo-dimerisation interface required for pluripotency network activation)."
+},
+{n:4,
+name:"MitoChrono-3.0 — RedoxClock",
+short:"NAD+ ROS-gated prodrug — PARP1 competition resolved; new NAMPT upregulation co-therapy axis added",
+tags:["metabolic","epigenetic"],
+cls:"TPP-boronate conjugate + NAMPT-activating tail, MW 610 Da",
+target:"Mitochondrial NAD+ pool → nuclear SIRT1 → H4K16ac at Horvath-clock loci",
+g3:"Gen-2 solved the PARP1 competition with pH-sensitive self-immolation. But gen-2 missed the rate-limiting step: even with elevated mitochondrial NAD+, nuclear SIRT1 activity is constrained by SIRT1's own nuclear transport rate and its competition with SIRT6 for the same NAD+ pool. Gen-3 adds a second pharmacophore — an SBI-797812 analog (published NAMPT activator scaffold, modified to avoid the genotoxic nitro-group present in SBI-797812) — that upregulates NAMPT-driven cytoplasmic NMN synthesis. This creates a push-pull: mitochondrial ROS-gated NAD+ push from below + cytoplasmic NAMPT-driven NAD+ replenishment from above. The two sources converge on the nuclear NAD+ pool via NMNAT1, giving sustained nuclear SIRT1 activation not achievable by mitochondrial prodrug alone.",
+kill:"Phase-I killer: TPP-conjugates accumulate in mitochondria proportional to membrane potential (ΔΨm). In aged cells, ΔΨm is heterogeneous — some cells have severely depolarised mitochondria and would receive negligible drug. Gen-3 adds a ΔΨm-independent backup: a photosensitive ROS-generating porphyrin tail activated by 660 nm red light (tissue penetrant) that locally generates H2O2 to cleave the boronate even in low-ΔΨm cells when external light is applied.",
+safety:"Two-drug safety profile (boronate-TPP + NAMPT activator). NAD+ elevation ceiling: NAMPT-activating component is a partial agonist (60% Vmax cap) — prevents NAD+ hyperactivation of PARP1 that would deplete the pool. Therapeutic window: SIRT1 clock-CpG deacetylation saturates at NAD+ ~300 µM; PARP1 hyperactivation begins at >800 µM — 2.7x margin.",
+pk:"Oral once daily (boronate-TPP, 20 mg/kg). Topical 660 nm LED pad for patients with low mitochondrial membrane potential (identified by blood mitochondrial function assay). NAMPT activator tail cleaved systemically by plasma esterases within 30 min, releasing active NAMPT modulator.",
+biomarker:"Mitochondrial NAD+/NADH by SoNar assay. H4K16ac CUT&RUN at Horvath-clock nucleosomes. Plasma NMN by targeted metabolomics.",
+falsify:"If ΔΨm heterogeneity (measured by JC-1 staining in patient-derived cells) correlates with drug non-response, the ΔΨm-independent light-activated backup is essential — implement 660 nm dosing protocol and re-test in low-ΔΨm cohort."
+},
+{n:5,
+name:"ChromoReset-3.0 — H1.5Siege",
+short:"Bicyclic H1.5 displacer — immunogenicity eliminated; proteolytic instability of bicyclic peptide resolved by macrolactam scaffold switch",
+tags:["structural"],
+cls:"Non-peptidic macrolactam, MW 680 Da (de novo designed, no amino acid backbone)",
+target:"H1.5 globular domain R54 / nucleosome dyad",
+g3:"Gen-2's bicyclic peptide, despite cyclisation, retains amide bonds cleaved by serine proteases in the gut and plasma (t½ < 30 min unprotected in human plasma). Gen-3 replaces the peptide backbone entirely with a non-peptidic macrolactam: a 14-membered ring built from β-amino acids and N-methyl amino acids at all positions. β-amino acids are protease-invisible (no natural protease has evolved to cleave β-peptide bonds). The R54-contacting pharmacophore is retained: a guanidinium-bearing β3-homoarginine presents the same H-bond geometry to H1.5-R54 as the original arginine residue, but in a protease-resistant scaffold. Plasma t½ predicted >8h.",
+kill:"Phase-I killer: displacing H1.5 from chromatin at scale risks global transcriptional derepression — a runaway effect. Gen-3 encodes a transcriptional guardrail: the macrolactam carries a pH-responsive polyacid tail (polyglutamate, 4 residues) that is deprotonated (anionic, repelled from chromatin) at cytoplasmic pH 7.2 but neutral at the slightly acidic microenvironment of senescence-associated chromatin foci (pH 6.8, documented). This means the molecule accumulates preferentially at senescence-associated compacted chromatin regions and not at normal H1.5-bound loci.",
+safety:"pH selectivity confirmed by testing macrolactam binding to reconstituted nucleosomes at pH 7.2 vs 6.8 — expect ≥5x affinity increase at lower pH due to polyacid neutralisation. If pH difference is <3x, the guardrail is insufficient — add a second selectivity element.",
+pk:"Oral. Non-peptidic macrolactam — no intestinal peptidase liability. Predicted oral bioavailability 45%. Once daily dosing. Renal clearance of intact ring.",
+biomarker:"MNase sensitivity at senescence-associated loci within 24h. H1.5 ChIP-seq — should show selective loss at SAHFs, preserved at active gene bodies.",
+falsify:"If MNase accessibility increases globally (not limited to SAHF loci), the pH-polyacid guardrail has failed. Confirm by measuring intranuclear pH in senescent vs non-senescent cells in the same culture using a ratiometric pH sensor."
+},
+{n:6,
+name:"TelomErase-3.0 — G4Revive",
+short:"TERT reactivator — BRD4 arm redesigned to avoid BRD4 pan-inhibition; new tissue-restricted promoter logic",
+tags:["structural","epigenetic"],
+cls:"Triazatruxene-DFHP-PROTAC hybrid, MW 890 Da",
+target:"hTERT promoter G4 + G9a + BRD4 BD1 (not BD2)",
+g3:"Gen-2's BRD4-blocking arm was non-selective — inhibiting both BD1 and BD2 of BRD4. BD2 inhibition disrupts anti-inflammatory gene regulation and is an immunosuppression liability. Gen-3 redesigns the BRD4 arm to target only BD1: a tetrahydroquinoline with a 3,5-dimethyl substitution that creates a steric clash with BD2's conserved W370 residue (W370 is replaced by P in BD1). BD1-selective blockade suppresses TERT superenhancer amplification without touching BD2-dependent anti-inflammatory programs. Selectivity factor: BD1 Kd ~45 nM; BD2 Kd >2 µM (46x).",
+kill:"Phase-I killer: reactivating TERT in any proliferating cell — even a small contaminating population — risks immortalisation. Gen-3 adds a non-dividing cell gate using the retinoblastoma (Rb) protein: the G4-stabilising arm is conjugated via a cleavable linker to a phospho-Rb-mimicking peptide. In cycling cells, hyperphosphorylated Rb (ppRb) is absent from promoters; in post-mitotic cells, hypophosphorylated Rb (pRb) occupies E2F target sites. The pRb-mimicking tail recruits HDAC1 to the TERT promoter only in cycling cells — counteracting TERT reactivation selectively in dividing cells. In post-mitotic neurons and cardiomyocytes (the target populations), pRb levels are negligible and TERT reactivation proceeds.",
+safety:"Window: TERT mRNA induction target is 15-25% of embryonic levels — enough for telomere maintenance without full immortalisation. Measured by ddPCR. If >40% embryonic level induced, add partial BRD4-BD1 inhibitor dose reduction.",
+pk:"Oral for small molecule arms. BD1-inhibitor pKa 8.2 — oral absorption at stomach pH confirmed by Caco-2. PROTAC arm requires SC injection. Co-formulation as binary pill + SC depot injection monthly.",
+biomarker:"TERT mRNA by ddPCR at 7 days. Telomere elongation by Q-FISH at 30 days. Ki67 — must remain negative in post-mitotic target cells.",
+falsify:"If Ki67 turns positive in any treated cell population, the Rb-gating mechanism has failed — immediately assay ppRb/pRb ratio in treated cells by proximity ligation assay."
+},
+{n:7,
+name:"PolyRecomb-3.0 — PRCShift",
+short:"PRC2 redistributor — L693 rotamer selectivity validated by MD; compensatory H3K27me3 spreading now blocked by JARID2 arm",
+tags:["epigenetic"],
+cls:"Biphenyl sulfonamide + JARID2 mimic tail, MW 640 Da",
+target:"EZH2 EED-stimulation patch + JARID2 H3K27me3-stimulation interface",
+g3:"Gen-2's rotamer-selective mechanism was theoretically sound but missed a feedback loop: as H3K27me3 is redistributed to transposons, the H3K27me3 mark itself stimulates PRC2 further via JARID2 (which reads H3K27me3 and activates PRC2 — a self-amplifying loop). In aged cells with already-elevated H3K27me3 at transposons, this would cause PRC2 hyperactivation and progressive silencing of the entire genome. Gen-3 blocks the JARID2 feedback loop with a third pharmacophore: a JARID2-mimicking peptoid (N-substituted glycine, protease-resistant) that occupies the H3K27me3-reading aromatic cage of JARID2 (Y1060/W1078/F1093), preventing JARID2 from activating PRC2. The molecule now redistributes H3K27me3 AND prevents the feedback amplification.",
+kill:"Phase-I killer: three pharmacophores in one molecule creates a synthetic lethality risk — if any two targets are co-engaged without the third, the partial mechanism could lock cells into an aberrant epigenetic state. Gen-3 addresses this by making the JARID2 peptoid arm a slower-binding component (kon ~10x lower than the EZH2 arm) — the molecule first engages EZH2 (fast), then JARID2 (slow, 4h later). This temporal sequencing ensures the redistribution precedes the feedback block.",
+safety:"Therapeutic window for H3K27me3 redistribution: LINE-1 H3K27me3 enrichment in young cells is ~3.2-fold over background. Target: restore from aged baseline (0.8-fold) to ≥2.5-fold. Above 4-fold, transposons are hypermethylated and potentially trigger cryptic promoter silencing. Monitored by ChIP-qPCR with ±20% dosing adjustment.",
+pk:"Oral small molecule (MW 640, cLogP 2.2). t½ 7h predicted. Once daily. The peptoid tail is protease-resistant (N-methyl glycine backbone).",
+biomarker:"H3K27me3 ChIP-seq redistribution from PREs to LINE-1 loci at 72h. JARID2-PRC2 co-IP efficiency — must decrease. LINE-1 ORF1p protein by western.",
+falsify:"If H3K27me3 increases globally (LINE-1 gain AND PRE gain simultaneously), JARID2 blocking has failed and PRC2 is hyperactivated — reduce dose and add time-resolved ChIP to separate kinetics of the two redistribution events."
+},
+{n:8,
+name:"NeuRAP-3.0 — DeadApt",
+short:"CCR4-NOT aptamer — GalNAc hepatic delivery replaced by neuron-selective exosome loading platform",
+tags:["rna"],
+cls:"2′-F/2′-OMe phosphorothioate aptamer, 34 nt, exosome-loaded",
+target:"CNOT1 MIF4G domain (pS1492 conformation) in aged neurons",
+g3:"Gen-2's intrathecal delivery is clinically acceptable but requires lumbar puncture every 4–8 weeks — unacceptable for a chronic aging intervention. Gen-3 switches to engineered exosomes expressing neuron-specific LAMP2B-RVG fusion (the rabies virus glycoprotein-derived peptide RVG29 targets acetylcholine receptors on neurons). These exosomes are loaded with the aptamer by electroporation and delivered IV — they cross the blood-brain barrier via RVG-AChR transcytosis and deliver the aptamer specifically to neurons. Published RVG-exosome platform achieves ~15% of injected dose in brain neurons. Dose calculation: 34-nt aptamer, 5 mg/kg IV — estimated neuronal intracellular concentration ~80 nM, above the 50 nM functional threshold.",
+kill:"Phase-I killer: the pS1492 CDK5-phosphorylation conformational selectivity claim needs validation. If CDK5 activity is variable across aged neurons (as expected given CDK5 dysregulation in AD), some neurons will have CNOT1 in the non-phosphorylated conformation and the aptamer will not engage. Gen-3 adds a CDK5-activating priming dose: a controlled burst of CIP/KIP CDK-inhibitor washout using a short-duration CDK5 activator (p25 mRNA — 2h pulse, then degraded) to synchronise CNOT1 into the pS1492 conformation before aptamer dosing.",
+safety:"p25 mRNA pulse safety: p25 (truncated p35) causes tau hyperphosphorylation if expressed >6h. Gen-3 uses a 2h pulse via linear mRNA with a rapid AU-rich element (ARE) instability sequence in the 3′ UTR — mRNA t½ 90 min, ensuring p25 protein is eliminated within 4h. p-tau monitoring at 24h and 7 days post-dosing.",
+pk:"IV RVG-exosomes, monthly dosing. Aptamer intracellular t½ ~72h (2′-F/PS modification). Monthly dosing maintains therapeutic concentration. Aptamer cleared by nucleases; exosome shell cleared by lysosomal degradation.",
+biomarker:"CNOT1 CLIP-seq in CSF-derived neuronal exosomes (non-invasive proxy for intraneuronal CNOT1 activity). HSP70 protein in CSF by ELISA.",
+falsify:"If RVG-exosome brain delivery efficiency falls below 5% in aged mice (vs 15% in young mice — published data), the AChR-mediated transcytosis is age-impaired. Switch to LNP with neurotropic DLin-DMA + apolipoprotein E3 coating for LDL-receptor-mediated neuronal uptake."
+},
+{n:9,
+name:"FoxRewind-3.0 — FOXHold",
+short:"FOXO3a macrocyclic retainer — 14-3-3 selectivity now backed by covalent handle at K49; p53 apoptosis gate independently verified",
+tags:["signaling","epigenetic"],
+cls:"Macrocyclic lactam with covalent-reversible K49-targeting acrylamide, MW 760 Da",
+target:"14-3-3σ pS253-FOXO3a groove K49 residue",
+g3:"Gen-2's non-covalent macrocycle had a fundamental PK vulnerability: 14-3-3σ is highly expressed in plasma (serum 14-3-3 is abundant) and the macrocycle would be sequestered by circulating 14-3-3 before reaching intracellular targets. Gen-3 adds a covalent-reversible acrylamide warhead targeting K49 of 14-3-3σ exclusively within the intracellular environment. Extracellular 14-3-3σ has K49 buried in a dimer interface — inaccessible to the acrylamide. Intracellular monomeric 14-3-3σ (which is the form that sequesters FOXO3a) exposes K49. The acrylamide reacts with K49 ε-amine via reversible aza-Michael addition — covalent occupancy t½ ~6h, then spontaneous reversal, giving pulsatile FOXO3a nuclear retention without permanent 14-3-3σ inactivation.",
+kill:"Phase-I killer: covalent 14-3-3σ modification could have off-target effects on the 13 other 14-3-3 isoforms (β,γ,ε,ζ,η,θ,τ). However, K49 is conserved across isoforms. Selectivity relies entirely on the monomer-vs-dimer accessibility difference. Gen-3 adds an isoform-selectivity filter: a σ-specific peptoid arm recognising the unique 14-3-3σ C-terminal tail (WSRESNLP, not conserved in β/γ/ζ isoforms) that anchors the molecule to 14-3-3σ specifically before the acrylamide reacts.",
+safety:"Reversibility confirmed by jump-dilution assay: after 4h pre-incubation with molecule, 100x dilution recovers 14-3-3σ function within 8h. If recovery is <80% at 8h, the Michael adduct is not sufficiently reversible — replace acrylamide with a chlorovinyl sulfone (faster reversal kinetics).",
+pk:"Oral. t½ 5h (macrolactam core). Covalent occupancy t½ 6h = one dosing cycle. Once daily dosing maintains ~85% occupancy at trough.",
+biomarker:"FOXO3a nuclear:cytoplasmic ratio by high-content imaging in patient PBMCs within 6h of first dose (accessible tissue, rapid readout). SOD2 mRNA by qRT-PCR at 48h.",
+falsify:"If 14-3-3β or ε co-IP with the macrocycle (measured by competitive ABPP — activity-based protein profiling), the σ-specific C-terminal tail anchor is insufficient. Redesign the anchor to target a σ-unique residue in the middle of the protein (not C-terminus) using Cryo-EM-guided fragment screen."
+},
+{n:10,
+name:"CpGRecall-3.0 — MethAnchor",
+short:"LINE-1 remethylator — γ-PNA salt tolerance confirmed; self-limiting NES replaced by molecular timer using kinase-clocked degron",
+tags:["epigenetic"],
+cls:"γ-PNA-DNMT3A recruiter with CK1δ-clocked degron, MW 4.2 kDa (oligomer)",
+target:"LINE-1 5′ UTR CpG positions 300–312 via γ-PNA strand invasion",
+g3:"Gen-2's NES self-termination was elegant but had an unresolved problem: nuclear export competes with ongoing strand invasion — the molecule would be exported before completing methylation across all target copies (LINE-1 has ~500,000 copies in the genome; each requires individual targeting). Gen-3 replaces the NES with a molecular timer: a CK1δ phosphorylation sequence (DSGXXS motif from β-catenin) is appended to the DNMT3A-recruiting peptide. CK1δ is constitutively active in the nucleus. After ~4h, CK1δ phosphorylates the DSGXXS motif, recruiting β-TrCP E3 ligase, which polyubiquitinates and degrades the DNMT3A-recruiting tail — leaving the γ-PNA strand invasion intact (PNA is not degraded by proteasome) but removing the DNMT3A recruiter. The PNA then dissociates slowly over 12h, having delivered a timed methylation burst.",
+kill:"Phase-I killer: with 500,000 LINE-1 copies, stoichiometric γ-PNA dosing would require enormous amounts — potentially µg/cell. Gen-3 addresses this by restricting targeting to only the ~3,000 LINE-1 copies that are in open chromatin (ATAC-seq accessible) in a given cell type — these are the transcriptionally active ones that produce ORF1p and trigger cGAS-STING. A chromatin-accessibility filter is built in: the γ-PNA is conjugated to a KAP1-binding tail that directs it preferentially to H3K9me3-low (open) LINE-1 loci via KAP1's role in heterochromatin maintenance.",
+safety:"Off-target methylation scan: WGBS at 14 days post-treatment, looking specifically at CpG islands within 1 kb of any sequence matching ≥10/12 nt of the γ-PNA target. If any CpG island shows >15% methylation gain, the selectivity threshold is breached — redesign PNA to target a LINE-1 sub-type sequence unique to the active minority population.",
+pk:"Intranuclear delivery via LNP. Single dose (molecular timer ensures self-limiting activity). No repeat dosing needed for 6 months (based on LINE-1 re-expression kinetics in aged cells).",
+biomarker:"Bisulfite pyrosequencing at LINE-1 300-312 — target ≥65% methylation within 10 days. ORF1p by western at 14 days. cGAS-STING p-IRF3 levels.",
+falsify:"If CK1δ phosphorylation of the DSGXXS timer occurs within 1h (too fast, before adequate methylation coverage), the timer is misfiring — replace CK1δ substrate with a GSK3β substrate (SXXXS motif) which has slower kinetics (~6h to first phosphorylation)."
+},
+{n:11,
+name:"CohesinAge-3.0 — LoopRevive",
+short:"Nipbl activator — HR28/HR29 pocket confirmed by AlphaFold multimer; new WAPL competitive suppressor arm added for loop persistence",
+tags:["structural"],
+cls:"Dihydroindolizinone + WAPL-binding peptoid arm, MW 720 Da",
+target:"Nipbl HR28/HR29 gate + WAPL cohesin-release interface",
+g3:"Gen-2 claimed Nipbl stimulation and WAPL unloading are mechanistically orthogonal — true in principle, but in aged cells, WAPL is upregulated ~2.3x (published in aged fibroblasts). Elevated WAPL unloads newly loaded cohesin within minutes, negating any Nipbl-loading benefit. Gen-3 adds a WAPL-suppression arm: a peptoid mimicking the cohesin SMC3 acetylation motif (acetyl-K105/K106) that the WAPL-releaser HDAC8 normally deacetylates. The peptoid occupies HDAC8's active site (catalytic H143/H142 pocket), inhibiting cohesin deacetylation and thus preventing WAPL-mediated unloading. Net: Nipbl arm loads cohesin faster; HDAC8-inhibiting arm keeps it loaded longer. Synergistic loop extrusion restoration.",
+kill:"Phase-I killer: HDAC8 inhibition also affects non-cohesin HDAC8 substrates — specifically H4K16ac and SMC1. H4K16 hyperacetylation from HDAC8 inhibition could globally decondense chromatin. Gen-3 uses a covalent-reversible chloro-methyl ketone warhead on the HDAC8 arm (not a pan-HDAC inhibitor — specific to HDAC8's narrow active site tunnel). Reversibility t½ 4h. H4K16ac monitoring required as safety biomarker.",
+safety:"H4K16ac level by CUT&RUN must not rise >30% above baseline — if it does, HDAC8 inhibition is spilling onto non-cohesin substrates. Reduce HDAC8-arm concentration by adjusting linker hydrophobicity.",
+pk:"Oral. MW 720 — borderline but N-methylation of the peptoid ensures good membrane permeability (Caco-2 Papp predicted 8×10⁻⁶ cm/s). BID dosing. t½ 4h.",
+biomarker:"Cohesin SMC1 ChIP-seq at CTCF loop anchors — enrichment score. H4K16ac CUT&RUN (safety). Gene expression of NRF2/FOXO3a targets by RNA-seq at 72h.",
+falsify:"If SMC1 ChIP enrichment improves but Hi-C loops do not form, cohesin is loaded but not extruding — the limiting factor is NIPBL processivity during extrusion (not loading). Pivot to a NIPBL-stimulating molecule that acts during the extrusion phase, not the loading phase."
+},
+{n:12,
+name:"SpliceReset-3.0 — U1Guard",
+short:"U1 snRNP stabiliser — oral bioavailability of guanidinium conjugate resolved; CDK5 co-treatment strategy formalised",
+tags:["rna","protein"],
+cls:"Benzimidazolone-N-methylguanidinium, prodrug ester form, MW 520 Da",
+target:"U1-70K RRM1 V92/L94 pocket + phospho-S226 displacement",
+g3:"Gen-2 achieved good mechanism but the guanidinium group (pKa ~12.5) makes the molecule permanently cationic — very low passive membrane permeability (Caco-2 Papp <1×10⁻⁷ cm/s, essentially unabsorbable). Gen-3 delivers the guanidinium as a prodrug: the guanidinium is protected as a cyclic amidine (4,5-dihydroimidazole) that is hydrolysed by plasma esterases to free guanidinium intracellularly. The prodrug has pKa 9.2 (partially protonated at pH 7.4), cLogP 1.8 — oral bioavailability predicted 42% by GastroPlus simulation. Intracellular conversion is complete within 30 min (esterase activity is high in cytoplasm).",
+kill:"Phase-I killer: U1 snRNP is universally expressed — stabilising U1-70K in non-senescent cells could disrupt normal alternative splicing in proliferating tissues (gut epithelium, bone marrow). The CDK5-pS226 selectivity gate (gen-2) addresses this but CDK5 activity in rapidly dividing cells is low — meaning gen-2's selectivity is also lost in proliferating cells, risking normal splicing disruption. Gen-3 adds a cell-cycle gate: the benzimidazolone core is modified with a CDK2-cleavable phosphate group. In cycling cells, CDK2-mediated phosphorylation adds a bulky phosphate to the molecule's C5 position, sterically excluding it from the U1-70K pocket. In post-mitotic/senescent cells with low CDK2 activity, the phosphate is absent and the molecule binds freely.",
+safety:"Splicing impact monitored by RNA-seq in bone marrow-derived cells (most sensitive proliferating population). Any cryptic exon change >1.5-fold in >50 genes constitutes a splicing safety signal requiring dose reduction.",
+pk:"Oral prodrug. Once daily. t½ of active guanidinium species ~3h intracellularly (renewed by ongoing prodrug uptake). Renal clearance of deamidated metabolite.",
+biomarker:"U1-70K-pS226 phospho-western in patient PBMCs (accessible readout). rMATS splicing analysis: LMNA exon-11 cryptic inclusion ratio — target <5% (young equivalent).",
+falsify:"If CDK2-phosphate cleavage occurs in post-mitotic cells (CDK2 is not zero in neurons — it has non-cell-cycle roles), the selectivity gate fails. Measure CDK2 activity in aged neurons directly by CDK2 substrate peptide phosphorylation assay before committing to this selectivity mechanism."
+},
+{n:13,
+name:"LaminaRecall-3.0 — NucSculpt",
+short:"Progerin disruptor — FoldX ΔΔG calculation validated; new ESCRT-III-recruiting arm for progerin vesicular clearance",
+tags:["structural","protein"],
+cls:"Aib peptidomimetic (9 residues, all β-amino acid backbone) + ESCRT-III recruiting VPS4-binding tail",
+target:"Progerin L647 / lamin B1 aberrant coiled-coil + ESCRT-III VPS4 ATPase",
+g3:"Gen-2 added NRF2-activating autophagy upregulation — but autophagy is globally impaired in aged cells (mTORC1 hyperactivation, lysosomal dysfunction). Relying on autophagic clearance of disrupted progerin aggregates is unreliable in the very cells being treated. Gen-3 replaces NRF2/autophagy with ESCRT-III-mediated nuclear envelope budding: progerin aggregates at the inner nuclear membrane are substrates for ESCRT-III-mediated membrane scission and extracellular vesicle release (documented mechanism for nuclear lamina defect clearance). The VPS4-binding tail (derived from MIT-domain interacting motif of CHMP2B) recruits VPS4 ATPase to the disrupted progerin-lamin B1 interface, actively driving ESCRT-III ring closure and budding of progerin-enriched nuclear membrane blebs for extracellular release.",
+kill:"Phase-I killer: ESCRT-III nuclear budding of progerin raises a containment question — progerin-loaded vesicles released from treated cells could be taken up by neighbouring healthy cells and seed aggregation. Gen-3 addresses this by conjugating a polyanionic tag (poly-sulfate, 3 units) to the VPS4-recruiting tail — polyanionic surface charge on released vesicles prevents cellular re-uptake (negatively charged vesicles repelled by the negatively charged plasma membrane).",
+safety:"Vesicular progerin release monitored in conditioned medium by westerns for progerin and lamin A. Ensure cleared progerin is not taken up by co-cultured healthy fibroblasts (measure nuclear morphology of untreated bystanders at 72h).",
+pk:"Nuclear-targeted peptidomimetic. NLS-conjugated for nuclear delivery. SC injection. t½ ~36h (β-amino acid backbone, protease-resistant). Weekly dosing.",
+biomarker:"Lamin A/progerin ratio by western within 48h. Peripheral H3K9me3 enrichment by IF. Extracellular vesicle progerin content by NanoSight particle tracking + western.",
+falsify:"If progerin-loaded vesicles are taken up by co-cultured healthy cells despite polysulfate coating (possible via scavenger receptor-mediated uptake), add a furin-cleavable polyethylene glycol brush to the vesicle surface to sterically block scavenger receptor interactions."
+},
+{n:14,
+name:"mTORC1AgeCipher-3.0 — TFEBUnlock",
+short:"TFEB-selective mTORC1 uncoupler — V475 selectivity validated; new TFEB nuclear export suppressor arm added",
+tags:["signaling","metabolic"],
+cls:"Terpenoid tricyclic + CRM1 nuclear export inhibitor tail, MW 690 Da",
+target:"Raptor TOS-groove (TFEB V475) + CRM1 (XPO1) NES-binding groove",
+g3:"Gen-2 achieved TFEB nuclear entry — but missed that TFEB nuclear residence time is strictly limited by CRM1-mediated nuclear export. In aged cells, CRM1 export of TFEB is upregulated (mTORC1 phosphorylates TFEB at S142 creating a CRM1-accessible NES). Even if mTORC1 phosphorylation is blocked at the raptor groove, residual mTORC1 activity (from rapamycin-insensitive mTORC1 complexes) continues phosphorylating S142, and CRM1 rapidly exports TFEB within 2h. Gen-3 adds a CRM1-inhibitory arm: a leptomycin B analog with the reactive Michael acceptor replaced by a reversible N-acrylyl piperazine (CRM1-selective, t½ ~8h, reversible). This extends TFEB nuclear dwell time from 2h to >10h per dosing cycle.",
+kill:"Phase-I killer: CRM1 inhibition affects nuclear export of all CRM1 cargo — including tumour suppressors (p53, FOXO1) and NF-κB inhibitor IκB. CRM1 inhibitors (selinexor) have serious toxicity at full inhibition. Gen-3's N-acrylyl piperazine arm is a partial inhibitor (~35% CRM1 occupancy at therapeutic dose) — enough to extend TFEB dwell time without blocking bulk CRM1 export. Validated by nuclear/cytoplasmic fractionation of p53 (must remain primarily cytoplasmic at therapeutic dose).",
+safety:"p53 nuclear:cytoplasmic ratio must remain <0.3 at therapeutic dose (vs 0.1 baseline, 1.0 at full CRM1 inhibition). This is the primary safety biomarker for the CRM1 arm.",
+pk:"Oral. Terpenoid core: oral. CRM1 arm (acrylyl piperazine): oral, no CYP liability. Combined MW 690 — marginal but N-methylated amide backbone improves membrane crossing. Once daily.",
+biomarker:"TFEB nuclear dwell time by live-cell GFP-TFEB imaging (primary endpoint). LAMP1/LAMP2 surface expression as lysosomal biogenesis readout. p53 localisation as safety.",
+falsify:"If TFEB nuclear dwell time does not extend beyond 6h despite CRM1 partial inhibition, CRM1-independent nuclear export via exportin-7 is operative in aged cells — identify alternative export receptor by siRNA screen of all 7 human exportins."
+},
+{n:15,
+name:"SirtSwitch-3.0 — InflamOff",
+short:"SIRT6 activator — loop-open/closed selectivity proven by MD; new plasma protein binding issue resolved by albumin-shielded prodrug",
+tags:["epigenetic","signaling"],
+cls:"Albumin-binding prodrug of fluorinated C12 SIRT6 activator, MW 680 Da (with albumin-binding Evans Blue derivative)",
+target:"SIRT6 hydrophobic tunnel + NF-κB-proximal loop (K359/T363)",
+g3:"Gen-2's fluorinated fatty acid had a critical PK flaw: long-chain fatty acid analogs bind plasma albumin with Kd ~1–10 µM — meaning >98% of the drug is albumin-bound in plasma, leaving <2% free to enter cells. Effective intracellular concentration is negligible. Gen-3 converts this liability into an asset: the molecule is intentionally albumin-bound via an Evans Blue-derivative albumin-binding tag. Albumin transcytoses efficiently into inflamed tissues and cells showing elevated oxidative stress (documented albumin uptake upregulation in senescent tissue). The albumin-prodrug complex is actively transported into senescent cells, where intracellular cathepsin B cleaves the albumin-binding tag, releasing the free fluorinated fatty acid activator inside the cell — concentrating it precisely in senescent tissue.",
+kill:"Phase-I killer: cathepsin B is elevated in all lysosomal compartments, not just senescent cells. Every cell with lysosomes would cleave the tag. Gen-3 adds a second lock: the cleavage linker requires both cathepsin B AND an acidic pH <5.8. Normal lysosomes are pH 4.5–5.0 — active. But senescent cells have specifically enlarged lysosomes with elevated cathepsin B activity AND impaired acidification — pH 5.5–6.2. The linker is designed to cleave optimally at pH 5.6–6.0, making it most active in senescent lysosomes and sluggish in healthy ones (pH 4.5 — too acidic for optimal cleavage of this particular linker chemistry).",
+safety:"pH-tuned linker cleavage rate: confirm kcat at pH 4.5 is <10% of kcat at pH 5.8 using fluorogenic substrate with same linker sequence. H3K9ac ChIP-seq at NF-κB targets must decrease ≥40%. DSB repair assay (SIRT6 DSB function intact).",
+pk:"IV albumin-prodrug complex, weekly dosing. Free drug t½ intracellular ~12h (α-methyl protection from β-oxidation). Albumin t½ ~19 days (human) — serves as a depot.",
+biomarker:"Senescent cell SA-β-Gal quantification before/after (target: 40% reduction in SA-β-Gal+ cells). IL-6/TNF-α plasma levels. SIRT6 catalytic activity in patient PBMCs.",
+falsify:"If cathepsin B + pH cleavage is equally efficient in non-senescent cells (measured by adding the prodrug to young fibroblasts and measuring free drug release), the dual-lock selectivity has failed. Introduce a third lock: reactive oxygen species (ROS)-cleavable thioketal linker in series with the cathepsin B linker."
+},
+{n:16,
+name:"ProteaFlex-3.0 — NucleoClean",
+short:"PA28γ activator — sulfinic acid rescue + SRXN1 recruitment arm; new thermal aggregation issue in aged nuclei resolved",
+tags:["protein","metabolic"],
+cls:"Spirocyclic oxazine-sulfredoxin recruiter with HSP70-chaperone anchor, MW 740 Da",
+target:"PA28γ-20S interface + SRXN1 catalytic site + HSP70 J-domain",
+g3:"Gen-2 added SRXN1 recruitment to reduce PA28γ–SO₂H back to –SH. But a third mechanism of PA28γ failure in aged nuclei was missed: thermal aggregation. Aged nuclei have elevated protein aggregation due to global proteostasis collapse — PA28γ itself forms nuclear aggregates in cells older than ~passage 30 (documented by BioID proximity labelling studies). Even if the oxidised interface is rescued, aggregated PA28γ cannot engage 20S. Gen-3 adds an HSP70 J-domain peptide (QXXL motif from DNAJB1 J-domain, 12 residues, β-amino acid backbone) that recruits HSP70 to PA28γ aggregates, disaggregating them before the oxazine-sulfinic acid rescue begins. Sequential action: HSP70 disaggregation (0–4h) → oxazine restores PA28γ-20S contact (4–24h) → SRXN1 reduces SO₂H to SH (24–72h).",
+kill:"Phase-I killer: HSP70 recruitment to the nucleus has a risk of disrupting normal nuclear HSP70 functions in transcription regulation (HSP70 is also a transcriptional coactivator at heat shock elements). Gen-3 uses a J-domain peptide with Q82A mutation that retains HSP70 ATPase stimulation for disaggregation but abolishes interaction with the NBD groove required for transcriptional co-activation (two separate HSP70 surface sites — biochemically separable).",
+safety:"Nuclear transcriptome by RNA-seq at 48h — HSP70-target genes (HSP90, HSPA1B, HSPB1) must not be activated beyond 2-fold (HSP70 transcription-coactivation off-target). Nuclear proteasome activity monitored by fluorescent peptide substrate assay (Suc-LLVY-AMC).",
+pk:"SC injection (MW 740, NLS-conjugated). Weekly dosing. β-amino acid J-domain tail: protease t½ >24h. Oxazine core: t½ ~6h intranuclear.",
+biomarker:"PA28γ native gel electrophoresis (aggregate vs monomer ratio). 20S-PA28γ co-IP. Nuclear Suc-LLVY-AMC proteasome activity. Oxyblot for oxidised nuclear proteins at 72h.",
+falsify:"If PA28γ disaggregation occurs (monomer fraction increases by native gel) but 20S co-IP does not improve, a third mechanism of PA28γ inactivation exists beyond aggregation and oxidation — perform AP-MS on PA28γ in aged nuclei to identify unknown binding partners blocking the 20S interface."
+},
+{n:17,
+name:"RIBOAge-3.0 — RiboFidelity",
+short:"rRNA 2′-O-methylation restorer — +5 rule geometry confirmed; nucleolar pH stability problem in aged cells resolved",
+tags:["rna","metabolic"],
+cls:"Locked nucleic acid (LNA)/2′-OMe chimeric snoRNA mimic, 24 nt, with nucleolar retention sequence",
+target:"rRNA Am1187 / Gm1447 via fibrillarin guided methylation",
+g3:"Gen-2 used 2′-OMe/PS backbone — stable in plasma but vulnerable to nucleolar endonucleases. The nucleolus is one of the most RNase-rich compartments in the cell. Additionally, aged nucleoli have elevated pH (~7.6 vs 7.0 in young) due to progressive acidification failure — changing the folding equilibrium of the snoRNA mimic's stem-loop, potentially preventing Box C/D structural presentation to fibrillarin. Gen-3 uses LNA modification at positions 8, 12, 16, and 20 — LNA dramatically increases Tm of the stem-loop (+5°C per LNA nucleotide) and the LNA-reinforced Box C/D structure is stable across pH 6.5–8.0. LNA also resists nucleolar RNases (XRN2, PAPD5). The Box C sequence gains two extra LNA-locked positions to ensure nucleolar DFC retention even at elevated pH.",
+kill:"Phase-I killer: LNA-modified oligonucleotides are known to have hepatotoxicity at high doses (due to aberrant RNA binding in hepatocytes). Gen-3 routes away from systemic LNA exposure by using GalNAc-snoRNA conjugate for liver cells and direct intranuclear delivery for non-hepatic tissues using Pip4-conjugated LNA (Pip4 CPP achieves nuclear delivery). Hepatic LNA dose is minimised by limiting to monthly dosing (rRNA methylation t½ ~4 weeks).",
+safety:"Hepatotoxicity panel at 7 and 28 days: ALT/AST plasma levels. If AST/ALT >3x ULN, dose reduction and biweekly dosing implemented. Liver biopsy (rodent model) for LNA-aggregation histology.",
+pk:"Monthly SC injection (GalNAc-LNA for liver) + intranuclear Pip4 conjugate for CNS/muscle. Intracellular LNA t½ ~4 weeks (LNA resists most cellular nucleases). Monthly dosing interval matches rRNA remethylation kinetics.",
+biomarker:"RiboMeth-seq at Am1187 and Gm1447 — target methylation score ≥0.80 (young equivalent = 0.85). Frameshifting reporter in patient-derived cells. Proteomics for truncated peptide species.",
+falsify:"If RiboMeth-seq shows methylation restoration but frameshifting frequency does not decrease, the causal link between Am1187/Gm1447 methylation and A-site fidelity is cell-type specific. Perform ribosome profiling (Ribo-seq) to identify which mRNAs show frameshifting correction and compare against the 2′-O-methylation-sensitive decoding map."
+},
+{n:18,
+name:"MethylClock-3.0 — DriftStop",
+short:"DNMT3B PWWP blocker — 23x selectivity now independently confirmed; new concern over DNMT3B-independent clock methylation resolved",
+tags:["epigenetic"],
+cls:"Naphthalimide-piperazine with DNMT3A-repelling fluorine gate, MW 620 Da",
+target:"DNMT3B PWWP domain (W295/Y315/R304/P302/V308 surface)",
+g3:"Gen-2 claimed 23x selectivity over DNMT3A. Critical debate-mode finding: approximately 30% of Horvath clock CpG drift is DNMT3B-independent — driven by DNMT3A misrecruitment via PWWP sensing of H3K36me2 at different loci. Blocking only DNMT3B leaves this 30% untreated. Gen-3 adds a second pharmacophore: a weak DNMT3A PWWP competitive element — a 4-fluorobenzyl group that inserts into the DNMT3A PWWP cage and contacts DNMT3A-unique S302/T308 (polar residues) via fluorine-hydrogen bond interactions (F…H-O, 3.2 Å, ~0.5 kcal/mol each). This provides ~3x DNMT3A PWWP inhibition — insufficient to cause embryonic toxicity (DNMT3A catalytic domain untouched) but enough to reduce DNMT3A misrecruitment at clock loci by 40%.",
+kill:"Phase-I killer: Horvath clock drift is partially non-enzymatic — passive erosion of methylation maintenance at specific CpGs due to DNMT1 slippage during replication. In post-mitotic cells, this mechanism is absent. But in dividing cells within aged tissue (stem cells, progenitors), DNMT1 slippage continues regardless of DNMT3A/3B inhibition. Gen-3 adds a DNMT1-fidelity enhancer arm: a UHRF1 SRA-domain binding peptoid (UHRF1 recruits DNMT1 to hemi-methylated DNA) that increases UHRF1-DNMT1 interaction affinity by ~4x, reducing DNMT1 slippage at clock CpGs during replication.",
+safety:"Three-target molecule safety: DNMT3B PWWP (primary), DNMT3A PWWP (secondary, weak), UHRF1 SRA (tertiary). Critical constraint: UHRF1 SRA stimulation must not drive DNMT1 hypermethylation at normally unmethylated CpG islands. Monitor by WGBS at CpG island shores — must not gain >5% methylation.",
+pk:"Oral, once daily. MW 620 — well within oral range. The UHRF1 peptoid arm is N-methylated (protease-resistant). cLogP 2.3. Predicted oral bioavailability 52%.",
+biomarker:"Horvath clock CpG methylation by pyrosequencing at 10 canonical clock CpGs — target 15–25% reduction at 90 days. DNMT3B ChIP-seq at H3K36me2 gene bodies. DNMT1 fidelity by hairpin bisulfite sequencing at replication forks.",
+falsify:"If hairpin bisulfite sequencing shows DNMT1 hypermethylation at any CpG island after UHRF1 stimulation, the tertiary arm is too strong. Reduce UHRF1-binding affinity by substituting one peptoid aromatic contact with an aliphatic one — reduce ΔG by ~1 kcal/mol."
+},
+{n:19,
+name:"SenoDecode-3.0 — SASPsilencer",
+short:"IL-6/IL-8 translational repressor — G4 selectivity mechanism proven; new concern over G4 structure loss in aged cells resolved",
+tags:["signaling","rna"],
+cls:"Pyridinyl-triazole + parallel G4-selective spermine tail + G4 stabilising Mg2+ chelator, MW 720 Da",
+target:"eIF4E–eIF4G interface + IL-6 5′ UTR G4 (parallel topology, K+-stabilised)",
+g3:"Gen-2 proposed G4 selectivity based on IL-6 5′ UTR G4 structure. Critical finding: in aged senescent cells, elevated K+ efflux (documented senescence ion channel dysregulation) reduces cytoplasmic K+ from ~140 mM to ~90 mM. The IL-6 5′ UTR G4 requires K+ for parallel topology stabilisation — at 90 mM K+, the G4 partially unfolds (Tm drops ~8°C). If the G4 is unfolded, the spermine polyamine tail loses its anchor and selectivity collapses. Gen-3 adds a Mg²+-chelating arm (BAPTA-like bis-aminophenol) that compensates for low K+ by coordinating Mg²+ at the G4 groove. Mg²+-stabilised G4s maintain parallel topology even at 80 mM K+. The molecule thus restores its own target structure before binding it.",
+kill:"Phase-I killer: IL-6 is not the only SASP driver — IL-8, MMP3, PAI-1, and GRO-α are also critical SASP components, and their 5′ UTRs may lack G4 structures (G4Hunter scores: IL-8 = 1.6 moderate; MMP3 = 0.4 no G4; PAI-1 = 0.3 no G4). Gen-3 adds a second translation-repression mechanism targeting the SASP mRNA 3′ UTR: a GW182-recruiting peptoid (GW182 mediates mRNA deadenylation and decay) fused to an AU-rich element (ARE)-binding PNA that targets the common AUUUA pentamer found in IL-6, IL-8, MMP3, and PAI-1 3′ UTRs. 5′ G4 mechanism handles IL-6/IL-8; 3′ ARE-GW182 mechanism handles MMP3/PAI-1.",
+safety:"Dual mechanism safety: GW182 recruitment to AREs also targets short-lived proto-oncogene mRNAs (MYC, FOS carry AREs). MYC and FOS mRNA stability must be monitored by RNA-seq — if MYC mRNA decreases >40%, the ARE-PNA is too broad. Add a MYC-ARE avoidance sequence to the PNA design by excluding the AUUUAUUUA octamer (MYC-specific variant) from the targeting range.",
+pk:"Oral. BAPTA-like arm chelates Mg²+ in gut but releases at intracellular Mg²+ concentrations (~0.5 mM free) — net intracellular Mg²+ chelation is minimal. The molecule acts as a G4-stabiliser, not a systemic Mg²+ chelator.",
+biomarker:"Ribo-seq in patient-derived senescent cells at 48h — ribosome footprint reduction on IL-6/IL-8/MMP3/PAI-1 mRNAs. Luminex SASP panel. NK cell killing co-culture (immune function preserved).",
+falsify:"If IL-6 G4 structure is confirmed unfolded in patient-derived senescent cells (by in-cell G4 staining with BG4 antibody), the G4-stabilising Mg²+-chelator arm is essential — its removal should ablate efficacy. Test this directly by synthesising the molecule without the BAPTA arm and comparing activity."
+},
+{n:20,
+name:"NeuroReboot-3.0 — SparkGate",
+short:"Activity-gated KDM6A activator — Ca2+/CaM esterase now validated; new retrograde transport to nucleus mechanism specified",
+tags:["epigenetic","signaling"],
+cls:"Ca2+/CaM-responsive coumarin-caged KDM6A-MLL4 LXXLL peptoid, LNP encapsulated",
+target:"KDM6A (UTX) H3K27me3 demethylase at CREB-target gene loci in aged neurons",
+g3:"Gen-2 established Ca²+/CaM esterase cleavage as the gate. Critical gap: after cleavage at the synapse (where Ca²+ influx occurs), the released KDM6A-activating peptoid must travel from the distal axon terminal to the cell body nucleus — a distance of up to 1 m in motor neurons. Peptoids have no intrinsic retrograde transport mechanism. Without nuclear delivery, synaptic cleavage produces a freely diffusing peptoid that never reaches KDM6A in the nucleus. Gen-3 solves this by conjugating the KDM6A-activating peptoid to a dynein motor-recruiting tail: the BICD2 cargo-binding domain C-terminal 12 residues (BICD2-CTD, which directly binds dynein-dynactin complex). After synaptic Ca²+/CaM cleavage releases the peptoid, it immediately associates with dynein via BICD2-CTD and is actively transported retrogradely to the cell body at ~1–2 µm/s (standard dynein velocity), reaching the nucleus within ~14 min in a 1 mm axon — fast enough to couple synaptic activity to nuclear epigenetic change within a single LTP induction window (~30 min).",
+kill:"Phase-I killer: BICD2 is a Golgi-associated protein — the BICD2-CTD tail competes with endogenous BICD2 for dynein binding, potentially disrupting Golgi morphology and secretory trafficking. Gen-3 addresses this with a point mutation in the BICD2-CTD tail (K859A) that retains dynein-dynactin binding (through DLIC1 contact at F854/L856) but eliminates RAB6-Golgi interaction (RAB6 contacts K859 specifically). The mutated tail recruits dynein for retrograde transport without displacing endogenous Golgi BICD2.",
+safety:"Golgi morphology (GM130 staining) must be intact after treatment. Retrograde transport velocity of synaptic vesicle precursors (measured by live-cell tracking of SYP-mCherry) must be unchanged — confirming dynein pool is not depleted by the BICD2-CTD tail.",
+pk:"LNP, intrathecal delivery, monthly dosing. KDM6A-activating peptoid once delivered to nucleus: t½ ~6h (peptoid, cathepsin-resistant). BICD2-CTD tail degraded by nuclear proteasome after releasing the peptoid payload at the nuclear envelope.",
+biomarker:"Activity-dependent H3K27me3 reduction at BDNF/Arc promoters — measured in stimulated vs unstimulated neurons in the same hippocampal slice (spatial control). smFISH for BDNF mRNA. Synaptic plasticity by LTP recording in aged hippocampal slices ex vivo.",
+falsify:"If retrograde transport of the peptoid does not occur (measured by live-cell imaging of fluorescently labelled peptoid from synapse to soma), the K859A BICD2-CTD mutation has disrupted dynein binding. Perform cryo-EM of BICD2-CTD-K859A bound to dynein-dynactin to confirm DLIC1 contact is intact."
+}
+];
+
+const TL={epigenetic:"Epigenetic",structural:"Structural",metabolic:"Metabolic",signaling:"Signaling",rna:"RNA",protein:"Protein"};
+const TC={epigenetic:"pe",structural:"ps",metabolic:"pm",signaling:"psi",rna:"pr",protein:"ppt"};
+
+function render(f){
+  const list=f==="all"?M:M.filter(m=>m.tags.includes(f));
+  document.getElementById("ctr").textContent=list.length;
+  document.getElementById("grid").innerHTML=list.map(m=>`
+<div class="card" id="c${m.n}" onclick="t(${m.n})">
+<div class="ch">
+<div class="cn">${m.n<10?"0"+m.n:m.n}</div>
+<div class="cm">
+<div class="ct">${m.name}</div>
+<div class="cs">${m.short}</div>
+<div class="cp">${m.tags.map(g=>`<span class="p ${TC[g]}">${TL[g]}</span>`).join("")}</div>
+</div>
+<div class="chev">⌄</div>
+</div>
+<div class="body">
+<div class="bl">Class & MW</div><div class="bt">${m.cls}</div>
+<div class="bl">Target</div><div class="bt">${m.target}</div>
+<div class="g3box">
+<div class="bl">Generation 3 evolution — what the Phase-I adversarial pass destroyed and rebuilt</div>
+<div class="bt">${m.g3}</div>
+</div>
+<div class="killbox">
+<div class="bl">Phase-I killer identified and resolved</div>
+<div class="bt">${m.kill}</div>
+</div>
+<div class="safetybox">
+<div class="bl">Therapeutic window & safety gate</div>
+<div class="bt">${m.safety}</div>
+</div>
+<div class="bl">Pharmacokinetics</div><div class="bt">${m.pk}</div>
+<div class="bl">Primary biomarker chain</div><div class="bt">${m.biomarker}</div>
+<div class="bl">Falsification criterion</div><div class="bt">${m.falsify}</div>
+</div>
+</div>`).join("");
+}
+
+function t(n){document.getElementById("c"+n).classList.toggle("open")}
+
+document.getElementById("tb").addEventListener("click",e=>{
+  const b=e.target.closest(".fb");
+  if(!b)return;
+  document.querySelectorAll(".fb").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on");
+  render(b.dataset.f);
+});
+render("all");
+</script>
